@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Converting Ads</title>
+ 
+    <!-- Tailwind MUST be first -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="main.js" defer></script>
+    <style>
+      html {
+        background: #000;
+      }
+
+      body {
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 500ms ease, transform 500ms ease;
+      }
+
+      body.loaded {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+</head>
+<script>
+  // triggers immediately after first paint (NOT after full load)
+  document.addEventListener("DOMContentLoaded", () => {
+    requestAnimationFrame(() => {
+      document.body.classList.add("loaded");
+    });
+  });
+</script>
+<body class="opacity-0 translate-y-4 transition-all duration-700">
+ 
+  <!-- NAV-->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo -->
+        <a href="#" class="text-white font-display text-lg sm:text-xl tracking-wide">
+          ELITE <span class="text-accent">CONVERTING ADS</span>
+        </a>    
+
+        <!-- Desktop Links -->
+        <ul class="hidden md:flex items-center gap-8">
+          <li>
+            <a href="#examples" class="relative text-xs sm:text-sm font-medium tracking-wider uppercase text-white/50 transition-colors duration-300 hover:text-white group">Examples
+            <span class="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </li>
+          <li>
+            <a href="#process" class="relative text-xs sm:text-sm font-medium tracking-wider uppercase text-white/50 transition-colors duration-300 hover:text-white group">How It Works
+            <span class="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </li>
+          <li>
+            <a href="#packages" class="relative text-xs sm:text-sm font-medium tracking-wider uppercase text-white/50 transition-colors duration-300 hover:text-white group">Packages
+            <span class="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </li>
+          <li>
+            <a href="#why" class="relative text-xs sm:text-sm font-medium tracking-wider uppercase text-white/50 transition-colors duration-300 hover:text-white group">Why Us
+            <span class="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- CTA (desktop) -->
+        <a href="#order"
+          class="hidden md:inline-block bg-accent text-black font-mono text-xs font-bold tracking-wider uppercase
+                  px-5 py-2.5 rounded-sm transition hover:bg-[#d6ff44]">
+          Get Started →
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+          ☰
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden flex flex-col gap-4 py-4">
+        <a href="#examples" class="nav-link">Examples</a>
+        <a href="#process" class="nav-link">How It Works</a>
+        <a href="#packages" class="nav-link">Packages</a>
+        <a href="#why" class="nav-link">Why Us</a>
+
+        <a href="#order"
+          class="mt-2 bg-accent text-black text-center font-mono text-xs font-bold tracking-wider uppercase
+                  px-5 py-3 rounded-sm">
+          Get Started →
+        </a>
+      </div>
+
+    </div>
+  </nav>
+ 
+ 
+  <!-- HERO-->
+<section class="relative h-screen flex flex-col justify-between px-[5%] pt-[100px] pb-[40px] overflow-hidden">
+  <!-- BACKGROUND GLOW -->
+  <div class="absolute w-[800px] h-[800px] bg-accent/10 blur-[140px] rounded-full opacity-40 -top-40 -right-40"></div>
+
+  <!-- TOP HERO CONTENT (FULL WIDTH NOW) -->
+  <div class="relative z-10 w-full max-w-5xl mx-auto text-center animate-[fadeInUp_1s_ease-out]">
+
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 bg-accent/10 border border-accent/30
+                rounded-full px-4 py-2 font-mono text-[0.7rem] tracking-widest
+                uppercase text-accent mb-6">
+      <span class="w-2 h-2 rounded-full bg-accent animate-dotPulse"></span>
+      Now Accepting Orders
+    </div>
+
+    <!-- Heading -->
+    <h1 class="font-display text-[clamp(2.6rem,6vw,5.8rem)] leading-[0.95] text-white mb-5">
+      Ads Designed to
+      <span class="text-accent block">Convert & Scale</span>
+    </h1>
+
+    <!-- Subtext -->
+    <p class="text-white/50 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+      Elite Converting Ads builds high-converting ecommerce ads using proven formats,
+      strategic scripting, and performance-driven execution.
+    </p>
+
+    <!-- CTA -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#order"
+        class="bg-accent text-black font-mono text-xs font-bold tracking-widest uppercase
+               px-6 py-4 rounded-sm hover:bg-[#d6ff44] hover:-translate-y-0.5 transition">
+        Order Your Ad Now →
+      </a>
+
+      <a href="#examples"
+        class="text-white font-mono text-xs tracking-widest uppercase
+               px-6 py-4 rounded-sm border border-white/10 hover:border-white/30 hover:bg-white/5 transition">
+        See Examples
+      </a>
+    </div>
+
+  </div>
+ 
+  <!-- BOTTOM CAROUSEL -->
+  <div class="relative w-full mt-6">
+
+    <!-- LEFT ARROW -->
+    <button onclick="moveCarousel(-1)"
+      class="absolute left-4 top-1/2 -translate-y-1/2 z-20
+             bg-black/40 border border-white/10 p-3 rounded-full
+             hover:bg-black/70 transition">
+      ‹
+    </button>
+
+    <!-- RIGHT ARROW -->
+    <button onclick="moveCarousel(1)"
+      class="absolute right-4 top-1/2 -translate-y-1/2 z-20
+             bg-black/40 border border-white/10 p-3 rounded-full
+             hover:bg-black/70 transition">
+      ›
+    </button>
+
+    <!-- TRACK -->
+    <div id="carouselTrack"
+      class="flex gap-5 w-max transition-transform duration-500 ease-in-out">
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+          <video
+            class="w-full h-full object-cover opacity-0 transition-opacity duration-700"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            oncanplay="this.classList.remove('opacity-0')"
+          >
+          <source src="ASSETS/videos/4Mode Faucet.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+              <video
+              class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              oncanplay="this.classList.remove('opacity-0')"
+      >
+          <source src="ASSETS/videos/Intense Pulsed Light - 101 2x.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+              <video
+        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        oncanplay="this.classList.remove('opacity-0')"
+      >
+          <source src="ASSETS/videos/RipSurf Skateboard - 101.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+              <video
+        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        oncanplay="this.classList.remove('opacity-0')"
+      >
+          <source src="ASSETS/videos/Robot - 101.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+              <video
+        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        oncanplay="this.classList.remove('opacity-0')"
+      >
+          <source src="ASSETS/videos/Shoe Cleaner 9x16.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+              <video
+        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        oncanplay="this.classList.remove('opacity-0')"
+      >
+          <source src="ASSETS/videos/Triple Monitor - 101.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+              <video
+        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        oncanplay="this.classList.remove('opacity-0')"
+      >
+          <source src="ASSETS/videos/4Mode Faucet.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+          <source src="ASSETS/videos/Intense Pulsed Light - 101 2x.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+          <source src="ASSETS/videos/RipSurf Skateboard - 101.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+          <source src="ASSETS/videos/Robot - 101.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+          <source src="ASSETS/videos/Shoe Cleaner 9x16.mp4">
+        </video>
+      </div>
+
+      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
+        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+          <source src="ASSETS/videos/Triple Monitor - 101.mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+  <!-- TICKER-->
+  <div class="bg-accent text-black overflow-hidden py-3 relative mt-20">
+    <div class="flex gap-0 whitespace-nowrap animate-ticker">
+      <!-- Items (duplicated for seamless loop) -->
+      <script>
+        const items = ['TikTok Ads','Meta Ads','Instagram Reels','Story Ads','Ecommerce Creatives','Dropshipping Ads','Scroll-Stopping Hooks','24–48h Delivery','Unlimited Revisions'];
+        const allItems = [...items, ...items];
+        document.write(allItems.map(t =>
+          `<span class="ticker-item font-display text-[0.95rem] tracking-[0.12em] px-10 inline-flex items-center gap-4">${t}</span>`
+        ).join(''));
+      </script>
+    </div>
+  </div>
+ 
+  <!-- HOW IT WORKS-->
+  <section id="process" class="py-[100px] px-[5%] bg-black">
+ 
+      <div class="max-w-2xl mx-auto text-center flex flex-col items-center">
+        <div class="section-label reveal flex items-center gap-[10px] font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent mb-4">
+          Process
+        </div>
+
+        <h2 class="section-title reveal font-display text-[clamp(2.4rem,4.5vw,3.8rem)] leading-none tracking-[0.01em] mb-4">
+          From Scratch to Your<br>Winning Ad in Hours
+        </h2>
+
+        <p class="section-sub reveal text-[1rem] text-white/45 max-w-[480px] font-light">
+          Four simple steps. No back-and-forth, no delays. Just results.
+        </p>
+      </div>
+ 
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[80px] items-start mt-[60px]">
+ 
+      <!-- Steps -->
+      <div class="flex flex-col gap-0">
+ 
+        <!-- Step 01 -->
+        <div class="step reveal flex gap-6 py-8 border-b border-white/[0.07] group">
+          <div class="font-display text-[3rem] text-accent/15 leading-none flex-shrink-0 w-14 transition-colors duration-300 group-hover:text-accent">01</div>
+          <div>
+            <div class="font-display text-[1.5rem] tracking-[0.03em] mb-2">Submit Your Product</div>
+            <p class="text-[0.9rem] text-white/45 leading-[1.7] font-light">
+              Share everything we need to bring your product to life — name, images, description, and logo. The more detail you give, the sharper the ad.
+            </p>
+            <div class="flex flex-wrap gap-[6px] mt-3">
+              <span class="tag bg-white/5 border border-white/[0.07] rounded-sm text-[0.68rem] font-mono tracking-[0.08em] px-[10px] py-1 text-white/45 uppercase">Product Name</span>
+              <span class="tag bg-white/5 border border-white/[0.07] rounded-sm text-[0.68rem] font-mono tracking-[0.08em] px-[10px] py-1 text-white/45 uppercase">Images</span>
+              <span class="tag bg-white/5 border border-white/[0.07] rounded-sm text-[0.68rem] font-mono tracking-[0.08em] px-[10px] py-1 text-white/45 uppercase">Description</span>
+              <span class="tag bg-white/5 border border-white/[0.07] rounded-sm text-[0.68rem] font-mono tracking-[0.08em] px-[10px] py-1 text-white/45 uppercase">Logo</span>
+            </div>
+          </div>
+        </div>
+ 
+        <!-- Step 02 -->
+        <div class="step reveal flex gap-6 py-8 border-b border-white/[0.07] group">
+          <div class="font-display text-[3rem] text-accent/15 leading-none flex-shrink-0 w-14 transition-colors duration-300 group-hover:text-accent">02</div>
+          <div>
+            <div class="font-display text-[1.5rem] tracking-[0.03em] mb-2">Choose Your Ad Format</div>
+            <p class="text-[0.9rem] text-white/45 leading-[1.7] font-light">
+              Pick the aspect ratio that matches your placement strategy — vertical for TikTok and Stories, square for Meta feed dominance.
+            </p>
+            <div class="flex flex-wrap gap-[6px] mt-3">
+              <span class="tag bg-white/5 border border-white/[0.07] rounded-sm text-[0.68rem] font-mono tracking-[0.08em] px-[10px] py-1 text-white/45 uppercase">9:16 Vertical</span>
+              <span class="tag bg-white/5 border border-white/[0.07] rounded-sm text-[0.68rem] font-mono tracking-[0.08em] px-[10px] py-1 text-white/45 uppercase">1:1 Square</span>
+            </div>
+          </div>
+        </div>
+ 
+        <!-- Step 03 -->
+        <div class="step reveal flex gap-6 py-8 border-b border-white/[0.07] group">
+          <div class="font-display text-[3rem] text-accent/15 leading-none flex-shrink-0 w-14 transition-colors duration-300 group-hover:text-accent">03</div>
+          <div>
+            <div class="font-display text-[1.5rem] tracking-[0.03em] mb-2">Extras (Optional)</div>
+            <p class="text-[0.9rem] text-white/45 leading-[1.7] font-light">
+              Supercharge your creative with add-ons designed to maximize performance — voiceovers, multiple variations, custom hooks, and more.
+            </p>
+            <div class="flex flex-wrap gap-[6px] mt-3">
+              <span class="tag bg-white/5 border border-white/[0.07] rounded-sm text-[0.68rem] font-mono tracking-[0.08em] px-[10px] py-1 text-white/45 uppercase">Voiceover</span>
+              <span class="tag bg-white/5 border border-white/[0.07] rounded-sm text-[0.68rem] font-mono tracking-[0.08em] px-[10px] py-1 text-white/45 uppercase">+Variations</span>
+              <span class="tag bg-white/5 border border-white/[0.07] rounded-sm text-[0.68rem] font-mono tracking-[0.08em] px-[10px] py-1 text-white/45 uppercase">Thumbnail</span>
+            </div>
+          </div>
+        </div>
+ 
+        <!-- Step 04 -->
+        <div class="step reveal flex gap-6 py-8 group">
+          <div class="font-display text-[3rem] text-accent/15 leading-none flex-shrink-0 w-14 transition-colors duration-300 group-hover:text-accent">04</div>
+          <div>
+            <div class="font-display text-[1.5rem] tracking-[0.03em] mb-2">Submit &amp; Launch Ready</div>
+            <p class="text-[0.9rem] text-white/45 leading-[1.7] font-light">
+              Complete your order and we get to work immediately. Your ad is delivered in 24–48 hours, ready to upload and start converting.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+  <!-- RIGHT: VISUAL -->
+  <div class="lg:sticky lg:top-16 flex self-stretch">
+
+    <div class="w-full max-w-[420px] mx-auto bg-white/5 border border-white/10 rounded-2xl p-5 md:p-8 flex flex-col items-center justify-between text-center gap-5">
+
+      <!-- Top Label -->
+      <div class="text-xs tracking-[0.2em] text-white/70">
+        YOUR PRODUCT
+      </div>
+
+      <!-- Product Image -->
+      <div class="w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden bg-black flex items-center justify-center border border-accent/20 shadow-lg object-contain">
+        <img
+          src="ASSETS/Screenshot 2026-04-23 105311.png"
+          class="w-full h-full object-contain"
+          alt="Product"
+        />
+      </div>
+
+      <!-- Arrow -->
+      <svg class="w-5 h-8 opacity-70" viewBox="0 0 24 48" fill="none">
+        <path d="M12 0 L12 36" stroke="rgba(200,245,58,0.4)" stroke-width="2"/>
+        <path d="M4 28 L12 44 L20 28" stroke="rgba(200,245,58,0.6)" stroke-width="2"/>
+      </svg>
+
+      <!-- Label -->
+      <div class="text-accent text-xs tracking-[0.2em]">
+        HIGH CONVERTING AD
+      </div>
+
+      <!-- VIDEO PLAYER UI -->
+      <div class="relative w-full max-w-[220px] aspect-[9/16] rounded-xl overflow-hidden border border-white/10 bg-black group">
+
+        <!-- Video -->
+              <video
+              class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
+              autoplay
+              muted
+              loop
+              playsinline
+              controls
+              preload="metadata"
+              oncanplay="this.classList.remove('opacity-0')"
+        >
+          <source src="ASSETS/videos/Mini Shaver.mp4" type="video/mp4">
+        </video>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+ 
+<!-- WHY ELITE -->
+<section id="why" class="py-20 md:py-[120px] px-5 md:px-[5%] bg-[#101010]">
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[60px] items-start lg:items-center">
+
+    <!-- LEFT: TEXT -->
+    <div class="why-text reveal">
+
+      <div class="section-label flex items-center gap-[10px] font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent mb-4">
+        Why Choose Us
+      </div>
+
+      <h2 class="font-display text-[clamp(2rem,4vw,3.6rem)] leading-tight tracking-[0.01em] mb-4">
+        Your Winning Ad<br>Is Here.
+      </h2>
+
+      <p class="text-[1rem] text-white/45 max-w-[520px] font-light">
+        Every ad is built from scratch using proven ecommerce frameworks — designed to stop the scroll and drive real conversions.
+      </p>
+
+      <!-- BULLETS -->
+      <div class="flex flex-col gap-6 mt-10">
+
+        <!-- ITEM -->
+        <div class="flex items-start gap-4">
+          <div class="w-5 h-5 mt-1 rounded-full bg-accent/10 border border-accent/40 flex items-center justify-center text-[0.6rem] text-accent flex-shrink-0">✓</div>
+          <p class="text-[0.9rem] text-white/45 leading-[1.6]">
+            <strong class="text-white font-medium">Built from scratch, always.</strong> Every creative is built from the ground up for your specific product — unique visuals, unique script, unique feel.
+          </p>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-5 h-5 mt-1 rounded-full bg-accent/10 border border-accent/40 flex items-center justify-center text-[0.6rem] text-accent flex-shrink-0">✓</div>
+          <p class="text-[0.9rem] text-white/45 leading-[1.6]">
+            <strong class="text-white font-medium">Platform-native execution.</strong> We engineer ads that feel native to TikTok and Meta feeds — not like ads.
+          </p>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-5 h-5 mt-1 rounded-full bg-accent/10 border border-accent/40 flex items-center justify-center text-[0.6rem] text-accent flex-shrink-0">✓</div>
+          <p class="text-[0.9rem] text-white/45 leading-[1.6]">
+            <strong class="text-white font-medium">Built for buyers, not views.</strong> Every frame is designed to drive clicks and purchases, not vanity metrics.
+          </p>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-5 h-5 mt-1 rounded-full bg-accent/10 border border-accent/40 flex items-center justify-center text-[0.6rem] text-accent flex-shrink-0">✓</div>
+          <p class="text-[0.9rem] text-white/45 leading-[1.6]">
+            <strong class="text-white font-medium">Ecommerce-only focus.</strong> We specialize in fast-moving products and dropshipping conversion psychology.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: GRID -->
+    <div class="why-features reveal grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.07] border border-white/[0.07] rounded-2xl overflow-hidden">
+
+      <div class="bg-card p-6 md:p-8 transition hover:bg-[#1a1a1a]">
+        <div class="text-[1.5rem] mb-3">🎯</div>
+        <div class="font-display text-[1.1rem] mb-2">Ecommerce Experts</div>
+        <p class="text-[0.82rem] text-white/45 leading-[1.7]">
+          Built for impulse-driven product ads with high conversion intent.
+        </p>
+      </div>
+
+      <div class="bg-card p-6 md:p-8 transition hover:bg-[#1a1a1a]">
+        <div class="text-[1.5rem] mb-3">📈</div>
+        <div class="font-display text-[1.1rem] mb-2">Performance-First</div>
+        <p class="text-[0.82rem] text-white/45 leading-[1.7]">
+          Every creative decision is based on proven conversion data.
+        </p>
+      </div>
+
+      <div class="bg-card p-6 md:p-8 transition hover:bg-[#1a1a1a]">
+        <div class="text-[1.5rem] mb-3">🔥</div>
+        <div class="font-display text-[1.1rem] mb-2">Trending Formats</div>
+        <p class="text-[0.82rem] text-white/45 leading-[1.7]">
+          Modern ad styles that blend naturally into social feeds.
+        </p>
+      </div>
+
+      <div class="bg-card p-6 md:p-8 transition hover:bg-[#1a1a1a]">
+        <div class="text-[1.5rem] mb-3">⚡</div>
+        <div class="font-display text-[1.1rem] mb-2">Fully Original</div>
+        <p class="text-[0.82rem] text-white/45 leading-[1.7]">
+          No templates. Every ad is custom-built for your product.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+ 
+ 
+  <!-- ═══════════════════════════════════════════
+       PACKAGES
+  ═══════════════════════════════════════════ -->
+  <section id="packages" class="py-[100px] px-[5%] bg-black">
+ 
+    <div class="packages-header reveal text-center mb-[60px]">
+      <div class="section-label inline-flex items-center gap-[10px] font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent mb-4 justify-center">
+        Pricing
+      </div>
+      <h2 class="font-display text-[clamp(2.4rem,4.5vw,3.8rem)] leading-none tracking-[0.01em] mb-4">Simple, Transparent Packages</h2>
+      <p class="text-[1rem] text-white/45 max-w-[480px] font-light mx-auto">Pick your format. We'll handle everything else.</p>
+    </div>
+ 
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+ 
+      <!-- Starter -->
+      <div class="pkg-card reveal relative bg-card border border-white/[0.07] rounded-2xl p-9
+                  transition-all duration-200 hover:border-white/15 hover:-translate-y-1">
+        <div class="font-display text-[1.8rem] tracking-[0.04em] mb-1">Starter</div>
+        <div class="text-[0.78rem] text-white/45 mb-7">One format, one winning ad.</div>
+        <div class="font-display text-[3rem] text-accent leading-none mb-1.5">$100</div>
+        <span class="block text-[0.72rem] text-white/45 font-mono tracking-[0.08em] mb-7">per ad · delivered in 24–48h</span>
+        <div class="w-full h-px bg-white/[0.07] mb-6"></div>
+        <ul class="pkg-features flex flex-col gap-[10px] mb-8 list-none">
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">1 Ad Creative (9:16 or 1:1)</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">1 Extra Variation</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Custom script + hook</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Footage sourced from scratch</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Captions &amp; platform-native edits</li>
+        </ul>
+        <div class="mb-5 px-[14px] py-[10px] bg-accent/[0.07] border border-accent/20 rounded-sm
+                    font-mono text-[0.7rem] tracking-[0.06em] text-accent">YOU RECEIVE · 2 VIDEOS TOTAL</div>
+        <a href="#order" class="block w-full text-center py-[14px] rounded border border-white/[0.07] text-white
+                                font-mono text-[0.75rem] font-bold tracking-[0.1em] uppercase transition-all duration-200
+                                hover:border-white/30 hover:bg-white/[0.04]">Order Starter →</a>
+      </div>
+ 
+      <!-- Growth (Featured) -->
+      <div class="pkg-card featured reveal relative border border-accent/50 rounded-2xl p-9
+                  transition-all duration-200 hover:border-accent hover:-translate-y-1
+                  bg-gradient-to-br from-[#141a08] to-[#0f140a]">
+        <div class="absolute -top-[11px] left-1/2 -translate-x-1/2
+                    bg-accent text-black font-mono text-[0.6rem] font-bold tracking-[0.12em] uppercase
+                    px-[14px] py-1 rounded-sm whitespace-nowrap">Most Popular</div>
+        <div class="font-display text-[1.8rem] tracking-[0.04em] mb-1">Growth</div>
+        <div class="text-[0.78rem] text-white/45 mb-7">More angles. More chances to convert.</div>
+        <div class="font-display text-[3rem] text-accent leading-none mb-1.5">$250</div>
+        <span class="block text-[0.72rem] text-white/45 font-mono tracking-[0.08em] mb-7">per bundle · delivered in 48h</span>
+        <div class="w-full h-px bg-white/[0.07] mb-6"></div>
+        <ul class="pkg-features flex flex-col gap-[10px] mb-8 list-none">
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">3 Ad Creatives (9:16 or 1:1)</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">3 Extra Variations</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Custom scripts + multiple hooks</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Footage sourced from scratch</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Captions &amp; platform-native edits</li>
+        </ul>
+        <div class="mb-5 px-[14px] py-[10px] bg-accent/[0.07] border border-accent/20 rounded-sm
+                    font-mono text-[0.7rem] tracking-[0.06em] text-accent">YOU RECEIVE · 6 VIDEOS TOTAL</div>
+        <a href="#order" class="block w-full text-center py-[14px] rounded bg-accent text-black
+                                font-mono text-[0.75rem] font-bold tracking-[0.1em] uppercase transition-all duration-200
+                                hover:bg-[#d6ff44] hover:shadow-[0_8px_24px_rgba(200,245,58,0.25)]">Order Growth →</a>
+      </div>
+ 
+      <!-- Elite -->
+      <div class="pkg-card reveal relative bg-card border border-white/[0.07] rounded-2xl p-9
+                  transition-all duration-200 hover:border-white/15 hover:-translate-y-1">
+        <div class="font-display text-[1.8rem] tracking-[0.04em] mb-1">Elite</div>
+        <div class="text-[0.78rem] text-white/45 mb-7">Full arsenal for serious scaling.</div>
+        <div class="font-display text-[3rem] text-accent leading-none mb-1.5">$500</div>
+        <span class="block text-[0.72rem] text-white/45 font-mono tracking-[0.08em] mb-7">per bundle · delivered in 48h</span>
+        <div class="w-full h-px bg-white/[0.07] mb-6"></div>
+        <ul class="pkg-features flex flex-col gap-[10px] mb-8 list-none">
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">6 Ad Creatives (9:16 or 1:1)</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">6 Extra Variations</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Custom scripts + hook testing set</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Footage sourced from scratch</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Captions &amp; platform-native edits</li>
+          <li class="flex items-center gap-[10px] text-[0.85rem] text-white/45">Priority delivery</li>
+        </ul>
+        <div class="mb-5 px-[14px] py-[10px] bg-accent/[0.07] border border-accent/20 rounded-sm
+                    font-mono text-[0.7rem] tracking-[0.06em] text-accent">YOU RECEIVE · 12 VIDEOS TOTAL</div>
+        <a href="#order" class="block w-full text-center py-[14px] rounded border border-white/[0.07] text-white
+                                font-mono text-[0.75rem] font-bold tracking-[0.1em] uppercase transition-all duration-200
+                                hover:border-white/30 hover:bg-white/[0.04]">Order Elite →</a>
+      </div>
+    </div>
+  </section>
+ 
+ 
+  <!-- ORDER FORM -->
+  <section id="order" class="py-[100px] px-[5%] bg-[#101010]">
+    <div class="max-w-[720px] mx-auto">
+ 
+      <div class="order-header reveal text-center mb-14">
+        <div class="section-label inline-flex items-center gap-[10px] font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent mb-4 justify-center">
+          Order
+        </div>
+        <h2 class="font-display text-[clamp(2.4rem,4.5vw,3.8rem)] leading-none tracking-[0.01em] mb-4">
+          Let's Make Your<br>Product Go Trending
+        </h2>
+        <p class="text-[1rem] text-white/45 max-w-[480px] font-light mx-auto">
+          Fill in your product details below and we'll start crafting your winning ad immediately.
+        </p>
+      </div>
+ 
+      <form class="reveal" onsubmit="handleSubmit(event)">
+        <div class="grid grid-cols-2 gap-4">
+ 
+          <!-- Product Name -->
+          <div class="flex flex-col gap-2">
+            <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">Product Name / Site *</label>
+            <input type="text" id="product-name" placeholder="e.g. ArcLight Phone Holder" required
+                   class="bg-white/[0.04] border border-white/[0.07] rounded px-4 py-[14px] text-white font-body text-[0.9rem]
+                          outline-none transition-colors duration-200 w-full placeholder-white/20
+                          focus:border-accent/50 appearance-none" />
+          </div>
+ 
+          <!-- Email -->
+          <div class="flex flex-col gap-2">
+            <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">Your Email *</label>
+            <input type="email" id="email" placeholder="you@email.com" required
+                   class="bg-white/[0.04] border border-white/[0.07] rounded px-4 py-[14px] text-white font-body text-[0.9rem]
+                          outline-none transition-colors duration-200 w-full placeholder-white/20
+                          focus:border-accent/50 appearance-none" />
+          </div>
+ 
+          <!-- Ad Format -->
+          <div class="flex flex-col gap-2">
+            <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">Ad Format *</label>
+            <select id="ad-format" required
+                    class="bg-white/[0.04] border border-white/[0.07] rounded px-4 py-[14px] text-white font-body text-[0.9rem]
+                           outline-none transition-colors duration-200 w-full cursor-pointer appearance-none
+                           focus:border-accent/50" style="background-color:#1a1a1a;">
+              <option value="" disabled selected>Select format</option>
+              <option value="916">9:16 — TikTok / Stories / Reels</option>
+              <option value="11">1:1 — Meta Feed</option>
+            </select>
+          </div>
+ 
+          <!-- Package -->
+          <div class="flex flex-col gap-2">
+            <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">Package *</label>
+            <select id="package" required
+                    class="bg-white/[0.04] border border-white/[0.07] rounded px-4 py-[14px] text-white font-body text-[0.9rem]
+                           outline-none transition-colors duration-200 w-full cursor-pointer appearance-none
+                           focus:border-accent/50" style="background-color:#1a1a1a;">
+              <option value="" disabled selected>Select package</option>
+              <option value="starter">Starter — $100</option>
+              <option value="growth">Growth — $250 (Most Popular)</option>
+              <option value="elite">Elite — $500</option>
+            </select>
+          </div>
+ 
+          <!-- Description -->
+          <div class="flex flex-col gap-2 col-span-2">
+            <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">Additional Info / Script / Footage Notes *</label>
+            <textarea id="description" placeholder="Any extra details, script ideas, footage you have, or special instructions." required
+                      class="bg-white/[0.04] border border-white/[0.07] rounded px-4 py-[14px] text-white font-body text-[0.9rem]
+                             outline-none transition-colors duration-200 w-full placeholder-white/20
+                             focus:border-accent/50 resize-y min-h-[110px]"></textarea>
+          </div>
+ 
+          <!-- Uploads -->
+          <div class="flex flex-col gap-2 col-span-2">
+            <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">Product Image &amp; Logo (Optional)</label>
+            <div class="grid grid-cols-2 gap-3">
+ 
+              <div class="upload-box relative flex flex-col items-center gap-2 rounded-xl px-4 py-6 cursor-pointer
+                          bg-white/[0.03] text-center overflow-hidden transition-all duration-200
+                          hover:bg-accent/[0.04] hover:shadow-[0_0_24px_rgba(200,245,58,0.1)]"
+                   onclick="document.getElementById('upload-product').click()">
+                <input type="file" id="upload-product" accept="image/*" class="hidden"
+                       onchange="handleUpload(this,'upload-product-preview','upload-product-name')" />
+                <div class="upload-icon text-accent/50 transition-all duration-200">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div class="upload-label font-mono text-[0.72rem] tracking-[0.1em] uppercase text-white transition-colors duration-200">Product Image</div>
+                <div class="upload-sub text-[0.68rem] text-white/45 font-mono tracking-[0.06em]" id="upload-product-name">Click to upload · PNG, JPG, WEBP</div>
+                <img id="upload-product-preview" class="upload-preview w-full max-h-[120px] object-contain rounded-md mt-1 hidden" />
+              </div>
+ 
+              <div class="upload-box relative flex flex-col items-center gap-2 rounded-xl px-4 py-6 cursor-pointer
+                          bg-white/[0.03] text-center overflow-hidden transition-all duration-200
+                          hover:bg-accent/[0.04] hover:shadow-[0_0_24px_rgba(200,245,58,0.1)]"
+                   onclick="document.getElementById('upload-logo').click()">
+                <input type="file" id="upload-logo" accept="image/*" class="hidden"
+                       onchange="handleUpload(this,'upload-logo-preview','upload-logo-name')" />
+                <div class="upload-icon text-accent/50 transition-all duration-200">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12 l2.5 2.5 L16 9"/></svg>
+                </div>
+                <div class="upload-label font-mono text-[0.72rem] tracking-[0.1em] uppercase text-white transition-colors duration-200">Brand Logo</div>
+                <div class="upload-sub text-[0.68rem] text-white/45 font-mono tracking-[0.06em]" id="upload-logo-name">Click to upload · PNG, SVG, JPG</div>
+                <img id="upload-logo-preview" class="upload-preview w-full max-h-[120px] object-contain rounded-md mt-1 hidden" />
+              </div>
+            </div>
+          </div>
+ 
+          <!-- Extras -->
+          <div class="flex flex-col gap-2 col-span-2">
+            <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">Extras (Optional)</label>
+            <div class="grid grid-cols-3 gap-3">
+ 
+              <div class="flex flex-col gap-2">
+                <div class="extra-toggle bg-white/[0.03] border border-white/[0.07] rounded-md px-3 py-3 cursor-pointer
+                            transition-all duration-200 text-center select-none
+                            hover:border-accent/30"
+                     onclick="toggleExtra(this, 'voiceover-opts')">
+                  <div class="extra-toggle-label font-mono text-[0.72rem] tracking-[0.08em] uppercase text-white/45">Voiceover — $10</div>
+                </div>
+                <div class="extra-subopts" id="voiceover-opts">
+                  <select class="extra-select bg-white/[0.04] border border-white/[0.07] rounded px-[10px] py-2
+                                 text-white font-mono text-[0.68rem] tracking-[0.06em] w-full appearance-none"
+                          style="background-color:#1a1a1a;">
+                    <option value="" disabled selected>Select accent</option>
+                    <option value="british">British — $10</option>
+                    <option value="american">American — $10</option>
+                    <option value="asian">Asian — $10</option>
+                  </select>
+                </div>
+              </div>
+ 
+              <div class="flex flex-col gap-2">
+                <div class="extra-toggle bg-white/[0.03] border border-white/[0.07] rounded-md px-3 py-3 cursor-pointer
+                            transition-all duration-200 text-center select-none
+                            hover:border-accent/30"
+                     onclick="toggleExtra(this, 'variations-opts')">
+                  <div class="extra-toggle-label font-mono text-[0.72rem] tracking-[0.08em] uppercase text-white/45">+ Variations</div>
+                </div>
+                <div class="extra-subopts" id="variations-opts">
+                  <select class="extra-select bg-white/[0.04] border border-white/[0.07] rounded px-[10px] py-2
+                                 text-white font-mono text-[0.68rem] tracking-[0.06em] w-full appearance-none"
+                          style="background-color:#1a1a1a;">
+                    <option value="" disabled selected>Select quantity</option>
+                    <option value="1">1 Variation — $10</option>
+                    <option value="3">3 Variations — $25</option>
+                    <option value="5">5 Variations — $40</option>
+                  </select>
+                </div>
+              </div>
+ 
+              <div class="flex flex-col gap-2">
+                <div class="extra-toggle bg-white/[0.03] border border-white/[0.07] rounded-md px-3 py-3 cursor-pointer
+                            transition-all duration-200 text-center select-none
+                            hover:border-accent/30"
+                     onclick="toggleExtra(this, null)">
+                  <div class="extra-toggle-label font-mono text-[0.72rem] tracking-[0.08em] uppercase text-white/45">Thumbnail — $10</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+ 
+        <button type="submit"
+                class="w-full bg-accent text-black border-none py-[18px] rounded font-mono text-[0.85rem]
+                       font-bold tracking-[0.1em] uppercase cursor-pointer mt-6 transition-all duration-200
+                       hover:bg-[#d6ff44] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(200,245,58,0.3)]">
+          Submit My Order →
+        </button>
+        <p class="text-[0.75rem] text-white/45 text-center mt-3">
+          We'll confirm your order within a few hours and begin production immediately. ⚡
+        </p>
+      </form>
+    </div>
+  </section>
+ 
+ 
+  <!-- FOOTER-->
+  <footer class="bg-black border-t border-white/[0.07] px-[5%] py-12 flex items-center justify-between flex-wrap gap-6">
+    <div class="font-display text-[1.2rem] tracking-[0.06em]">
+      ELITE <span class="text-accent">CONVERTING ADS</span>
+    </div>
+    <div class="text-[0.72rem] text-white/20 font-mono">© 2026 Elite Converting Ads · All rights reserved</div>
+  </footer>

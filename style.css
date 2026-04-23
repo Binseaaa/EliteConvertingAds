@@ -1,0 +1,128 @@
+@import "tailwindcss";
+/* ── Global ── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    background: #080808;
+    color: #f5f5f0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ── Noise overlay ── */
+body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+}
+
+/* ── Section label rule ── */
+.section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: #c8f53a;
+}
+
+/* ── pkg-features arrow ── */
+.pkg-features li::before { content: '→'; color: #c8f53a; font-family: 'Space Mono', monospace; font-size: 0.75rem; flex-shrink: 0; }
+
+/* ── Ticker ── */
+.ticker-item::after { content: '✦'; opacity: 0.5; }
+
+/* ── Showcase cards ── */
+.showcase-card {
+    position: absolute;
+    border-radius: 18px;
+    overflow: visible;
+    border: 2px solid rgba(200,245,58,0.15);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04), 0 0 30px rgba(200,245,58,0.08);
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, border-color 0.35s ease;
+    cursor: pointer;
+}
+.showcase-card::before {
+    content: ''; position: absolute; inset: -28px; border-radius: 32px; z-index: -1;
+    opacity: 0.45; filter: blur(32px); transition: opacity 0.4s ease, filter 0.4s ease; pointer-events: none;
+}
+.showcase-card::after {
+    content: ''; position: absolute; inset: -2px; border-radius: 20px;
+    background: linear-gradient(135deg, rgba(200,245,58,0) 0%, rgba(200,245,58,0.6) 50%, rgba(58,255,163,0) 100%);
+    opacity: 0; transition: opacity 0.35s ease; pointer-events: none; z-index: 2;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude; -webkit-mask-composite: xor; padding: 2px;
+}
+.showcase-card:hover::before { opacity: 1; filter: blur(40px); }
+.showcase-card:hover::after  { opacity: 1; }
+.sc-1::before { background: radial-gradient(ellipse at center, rgba(200,245,58,0.75) 0%, transparent 70%); }
+.sc-2::before { background: radial-gradient(ellipse at center, rgba(200,245,58,1) 0%, rgba(58,255,163,0.4) 50%, transparent 70%); }
+.sc-3::before { background: radial-gradient(ellipse at center, rgba(200,245,58,0.75) 0%, transparent 70%); }
+.sc-4::before { background: radial-gradient(ellipse at center, rgba(58,255,163,0.7) 0%, transparent 70%); }
+.sc-5::before { background: radial-gradient(ellipse at center, rgba(200,245,58,0.65) 0%, rgba(58,255,163,0.4) 60%, transparent 70%); }
+.sc-6::before { background: radial-gradient(ellipse at center, rgba(58,255,163,0.7) 0%, transparent 70%); }
+.sc-2 { border-color: rgba(200,245,58,0.45) !important; }
+.sc-2::before { opacity: 0.65; }
+.showcase-card:hover {
+    border-color: rgba(200,245,58,0.7) !important;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.85), 0 0 60px rgba(200,245,58,0.35), 0 0 120px rgba(200,245,58,0.15), 0 0 0 1px rgba(200,245,58,0.4);
+    z-index: 10 !important; animation-play-state: paused !important;
+}
+.sc-1:hover { transform: rotate(-6deg) !important; }
+.sc-2:hover { transform: translateX(-50%) rotate(2deg) !important; }
+.sc-3:hover { transform: rotate(10deg) !important; }
+.sc-4:hover { transform: rotate(8deg) !important; }
+.sc-5:hover { transform: translateX(-50%) rotate(0deg) !important; }
+.sc-6:hover { transform: rotate(-4deg) !important; }
+.showcase-card:active { filter: brightness(1.1) !important; transition: filter 0.1s ease !important; }
+.sc-916 { aspect-ratio: 9/16; width: 240px; }
+.sc-1  { left: 2%;  top: 20px;   transform: rotate(-8deg);          z-index: 3; border-color: rgba(200,245,58,0.3); animation: floatA 5s ease-in-out infinite; }
+.sc-2  { left: 50%; top: 0px;    transform: translateX(-50%) rotate(0deg); z-index: 5; width: 280px; border-color: rgba(200,245,58,0.6); box-shadow: 0 28px 70px rgba(0,0,0,0.8), 0 0 50px rgba(200,245,58,0.15); animation: floatB 5s ease-in-out infinite 0.5s; }
+.sc-3  { right: 2%; top: 30px;   transform: rotate(8deg);           z-index: 3; border-color: rgba(58,255,163,0.3); animation: floatC 5s ease-in-out infinite 1s; }
+.sc-11 { aspect-ratio: 1/1; width: 220px; }
+.sc-4  { left: 8%;  bottom: 110px; transform: rotate(6deg);         z-index: 4; border-color: rgba(200,245,58,0.25); animation: floatD 5s ease-in-out infinite 1.5s; }
+.sc-5  { left: 50%; bottom: 90px;  transform: translateX(-50%) rotate(-2deg); z-index: 4; border-color: rgba(58,255,163,0.3); animation: floatE 5s ease-in-out infinite 2s; }
+.sc-6  { right: 8%; bottom: 110px; transform: rotate(-6deg);        z-index: 4; border-color: rgba(200,245,58,0.25); animation: floatF 5s ease-in-out infinite 2.5s; }
+
+/* ── Reveal ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── Upload box dashed border ── */
+.upload-box { border: 1.5px dashed rgba(200,245,58,0.25); }
+.upload-box:hover { border-color: rgba(200,245,58,0.7); }
+.upload-box.has-file { border-color: #c8f53a; border-style: solid; }
+
+/* ── Extra subopts ── */
+.extra-subopts { display: none; }
+.extra-subopts.visible { display: block; }
+
+/* ── flow-connector arrow ── */
+.flow-connector::after { content:'▾'; position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); font-size:0.6rem; color:rgba(200,245,58,0.5); }
+
+/* ── Process video top-crop iframe ── */
+.process-video-inner { position:relative; width:100%; padding-bottom:177.78%; overflow:hidden; border-radius:12px; }
+.process-video-inner iframe { position:absolute; top:-80px; left:0; width:100%; height:calc(100% + 160px); border:none; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .hero-visual { display: none !important; }
+    .process-visual { display: none !important; }
+    .nav-links-wrap { display: none !important; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

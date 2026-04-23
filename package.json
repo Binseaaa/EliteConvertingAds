@@ -1,0 +1,10 @@
+{
+  "name": "elite-converting-ads",
+  "version": "1.0.0",
+  "description": "Elite Converting Ads — Netlify site with Stripe",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.4",
+    "stripe": "^14.0.0",
+    "tailwindcss": "^4.2.4"
+  }
+}
