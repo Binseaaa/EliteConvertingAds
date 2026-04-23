@@ -1,7 +1,3 @@
-/* =============================================================
-   ELITE CONVERTING ADS — main.js
-   ============================================================= */
-
 'use strict';
 
 tailwind.config = {
@@ -83,55 +79,6 @@ tailwind.config = {
       },
     };
 
-    
-    /* ── Scroll reveal ── */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
- 
-    /* ── Extra toggles ── */
-    function toggleExtra(btn, subId) {
-      btn.classList.toggle('active');
-      const isActive = btn.classList.contains('active');
-      btn.style.borderColor = isActive ? '#c8f53a' : '';
-      btn.style.background  = isActive ? 'rgba(200,245,58,0.07)' : '';
-      const label = btn.querySelector('.extra-toggle-label');
-      if (label) label.style.color = isActive ? '#c8f53a' : '';
-      if (subId) {
-        const sub = document.getElementById(subId);
-        if (sub) sub.classList.toggle('visible', isActive);
-      }
-    }
- 
-    /* ── File upload preview ── */
-    function handleUpload(input, previewId, nameId) {
-      const file = input.files[0];
-      if (!file) return;
-      const box = input.closest('.upload-box');
-      box.classList.add('has-file');
-      document.getElementById(nameId).textContent = file.name;
-      const preview = document.getElementById(previewId);
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-      const icon = box.querySelector('.upload-icon');
-      if (icon) icon.style.display = 'none';
-    }
- 
-    /* ── Form submit ── */
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('.submit-btn') || e.target.querySelector('button[type="submit"]');
-      if (btn) {
-        btn.textContent = 'Order Received! ✓';
-        btn.style.background = '#3affa3';
-        setTimeout(() => {
-          btn.textContent = 'Submit My Order →';
-          btn.style.background = '';
-        }, 3000);
-      }
-    }
-
 // ─── CONFIG ───────────────────────────────────────────────────
 const CONFIG = {
   SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbw86YM14CXf9tWfuxo-vMC-zgIrQKegwyGQ_2NzJ9aH8beC7dk5aBXei5E5wRCNMUop/exec',
@@ -196,16 +143,6 @@ function handleUpload(input, previewId, nameId) {
   };
 
   reader.readAsDataURL(file);
-}
-
-// =============================================================
-//  EXTRAS TOGGLE
-// =============================================================
-function toggleExtra(el, subId) {
-  el.classList.toggle('active');
-  if (subId) {
-    document.getElementById(subId)?.classList.toggle('visible');
-  }
 }
 
 // =============================================================
@@ -682,3 +619,88 @@ setInterval(() => {
 
   updateCarousel();
 }, 5000);
+
+function toggleExtra(btn, targetId) {
+
+  // toggle dropdown
+  if (targetId) {
+    const el = document.getElementById(targetId);
+    el.classList.toggle('hidden');
+  }
+
+  // toggle active state on button
+  btn.classList.toggle('border-accent');
+  btn.classList.toggle('text-white');
+  btn.classList.toggle('bg-white/[0.06]');
+  btn.classList.toggle('text-white/60');
+}
+
+function previewImage(event, previewId) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    const img = document.getElementById(previewId);
+    img.src = e.target.result;
+    img.classList.remove("hidden");
+
+    // show remove button
+    const removeBtn = document.getElementById(previewId.includes("product") ? "product-remove" : "logo-remove");
+    if (removeBtn) removeBtn.classList.remove("hidden");
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function removeImage(e, inputId, previewId) {
+  e.stopPropagation();
+
+  const input = document.getElementById(inputId);
+  const img = document.getElementById(previewId);
+
+  input.value = "";
+  img.src = "";
+  img.classList.add("hidden");
+
+  const removeBtn = document.getElementById(previewId.includes("product") ? "product-remove" : "logo-remove");
+  if (removeBtn) removeBtn.classList.add("hidden");
+}
+
+function handleDrop(event, inputId, previewId) {
+  event.preventDefault();
+
+  const file = event.dataTransfer.files[0];
+  if (!file) return;
+
+  const input = document.getElementById(inputId);
+
+  // assign file manually
+  const dataTransfer = new DataTransfer();
+  dataTransfer.items.add(file);
+  input.files = dataTransfer.files;
+
+  previewImage({ target: input }, previewId);
+}
+
+document.querySelectorAll('[data-package]').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const packageValue = btn.dataset.package;
+    const price = btn.dataset.price;
+
+    // set package dropdown
+    const packageSelect = document.getElementById('package');
+    if (packageSelect) {
+      packageSelect.value = packageValue;
+      packageSelect.dispatchEvent(new Event('change'));
+    }
+
+    // optional: scroll to form
+    document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' });
+
+    console.log("Selected package:", packageValue, price);
+  });
+});
