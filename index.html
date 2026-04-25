@@ -23,13 +23,11 @@
 
       body {
         opacity: 0;
-        transform: translateY(8px);
-        transition: opacity 500ms ease, transform 500ms ease;
+        transition: opacity 500ms ease;
       }
 
       body.loaded {
         opacity: 1;
-        transform: translateY(0);
       }
     </style>
 </head>
@@ -41,7 +39,7 @@
     });
   });
 </script>
-<body class="opacity-0 translate-y-4 transition-all duration-700">
+<body class="">
  
   <!-- NAV-->
   <nav class="sticky top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/10">
@@ -322,6 +320,142 @@
     </div>
   </div>
  
+  <!-- EXAMPLES-->
+  <section id="examples" class="py-[100px] px-[5%] bg-[#101010]">
+ 
+    <div class="examples-header reveal text-center mb-16">
+      <div class="section-label inline-flex items-center gap-[10px] font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent mb-4 justify-center">
+        Examples
+      </div>
+      <h2 class="font-display text-[clamp(2.4rem,4.5vw,3.8rem)] leading-none tracking-[0.01em] mb-4">Elite Ads in Action</h2>
+      <p class="text-[1rem] text-white/45 max-w-[480px] font-light mx-auto">
+        Built for the formats that convert — native-feeling, platform-optimized, scroll-stopping.
+      </p>
+    </div>
+ 
+    <!-- 9:16 Group -->
+    <div class="format-group reveal mb-[60px]">
+      <div class="font-mono text-[0.68rem] tracking-[0.18em] uppercase text-white/45 mb-6 pb-3 border-b border-white/[0.07]">
+        <span class="text-accent mr-2">9:16</span> TikTok · Stories · Reels
+      </div>
+      <div class="grid grid-cols-3 gap-3 max-w-[900px]">
+
+        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+            style="aspect-ratio:9/16;"
+            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
+            <source src="ASSETS/videos/4Mode Faucet.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+              style="background:rgba(8,8,8,0.35);">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+                <polygon points="5,3 19,12 5,21"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+            style="aspect-ratio:9/16;"
+            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
+            <source src="ASSETS/videos/Mini Shaver.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+              style="background:rgba(8,8,8,0.35);">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+                <polygon points="5,3 19,12 5,21"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+            style="aspect-ratio:9/16;"
+            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
+            <source src="ASSETS/videos/RipSurf Skateboard - 101.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+              style="background:rgba(8,8,8,0.35);">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+                <polygon points="5,3 19,12 5,21"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 1:1 Group -->
+    <div class="format-group reveal">
+      <div class="font-mono text-[0.68rem] tracking-[0.18em] uppercase text-white/45
+                  mb-6 pb-3 border-b border-white/[0.07]">
+        <span class="text-accent mr-2">1:1</span> Meta Feed Ads
+      </div>
+      <div class="grid grid-cols-3 gap-3 max-w-[900px]">
+
+        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+            style="aspect-ratio:1/1;"
+            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
+            <source src="ASSETS/videos/Intense Pulsed Light - 101 2x.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+              style="background:rgba(8,8,8,0.35);">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+                <polygon points="5,3 19,12 5,21"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+            style="aspect-ratio:1/1;"
+            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
+            <source src="ASSETS/videos/Robot - 101.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+              style="background:rgba(8,8,8,0.35);">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+                <polygon points="5,3 19,12 5,21"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+            style="aspect-ratio:1/1;"
+            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
+            <source src="ASSETS/videos/Triple Monitor - 101.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+              style="background:rgba(8,8,8,0.35);">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+                <polygon points="5,3 19,12 5,21"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS-->
   <section id="process" class="py-[100px] px-[5%] bg-black">
  
@@ -417,7 +551,7 @@
       <!-- Product Image -->
       <div class="w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden bg-black flex items-center justify-center border border-accent/20 shadow-lg object-contain">
         <img
-          src="ASSETS/Screenshot 2026-04-23 105311.png"
+          src="ASSETS/images/Screenshot 2026-04-23 105311.png"
           class="w-full h-full object-contain"
           alt="Product"
         />
@@ -695,7 +829,7 @@
 </section>
  
  
- <!-- ORDER FORM -->
+<!-- ORDER FORM -->
 <section id="order" class="py-[100px] px-[5%] bg-[#101010]">
   <div class="max-w-[720px] mx-auto">
 
@@ -704,11 +838,9 @@
       <div class="section-label inline-flex items-center gap-[10px] font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent mb-4 justify-center">
         Order
       </div>
-
       <h2 class="font-display text-[clamp(2.4rem,4.5vw,3.8rem)] leading-none tracking-[0.01em] mb-4 text-white">
         Let's Make Your<br>Product Go Trending
       </h2>
-
       <p class="text-[1rem] text-white/45 max-w-[480px] font-light mx-auto">
         Fill in your product details below and we'll start crafting your winning ad immediately.
       </p>
@@ -722,30 +854,33 @@
 
         <!-- Product Name -->
         <div class="flex flex-col gap-2">
-          <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
+          <label for="product-name" class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
             Product Name / Site *
           </label>
-          <input type="text" id="product-name" required
+          <input type="text" id="product-name" name="product_name" required
+            autocomplete="organization"
             placeholder="e.g. ArcLight Phone Holder"
             class="bg-white/[0.04] border border-white/[0.07] rounded px-3 py-2 text-sm text-white placeholder-white/20 focus:border-accent/50 outline-none" />
         </div>
 
         <!-- Email -->
         <div class="flex flex-col gap-2">
-          <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
+          <label for="email" class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
             Your Email *
           </label>
-          <input type="email" id="email" required
+          <input type="email" id="email" name="email" required
+            autocomplete="email"
             placeholder="you@email.com"
             class="bg-white/[0.04] border border-white/[0.07] rounded px-3 py-2 text-sm text-white placeholder-white/20 focus:border-accent/50 outline-none" />
         </div>
 
         <!-- Format -->
         <div class="flex flex-col gap-2">
-          <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
+          <label for="ad-format" class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
             Ad Format *
           </label>
-          <select id="ad-format" required
+          <select id="ad-format" name="ad_format" required
+            autocomplete="off"
             class="cursor-pointer appearance-none bg-[#1a1a1a] border border-white/[0.07] rounded px-3 py-2 text-sm text-white focus:border-accent/50 outline-none">
             <option value="">Select format</option>
             <option value="916">9:16 — TikTok / Stories</option>
@@ -755,10 +890,11 @@
 
         <!-- Package -->
         <div class="flex flex-col gap-2">
-          <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
+          <label for="package" class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
             Package *
           </label>
-          <select id="package" required
+          <select id="package" name="package" required
+            autocomplete="off"
             class="cursor-pointer appearance-none bg-[#1a1a1a] border border-white/[0.07] rounded px-3 py-2 text-sm text-white focus:border-accent/50 outline-none">
             <option value="">Select package</option>
             <option value="starter">Starter — $100</option>
@@ -769,106 +905,102 @@
 
         <!-- Description -->
         <div class="md:col-span-2 flex flex-col gap-2">
-          <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
+          <label for="description" class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
             Additional Info *
           </label>
-          <textarea id="description" required
+          <textarea id="description" name="description" required
+            autocomplete="off"
             class="bg-white/[0.04] border border-white/[0.07] rounded px-3 py-2 text-sm min-h-[110px] placeholder-white/20 resize-y focus:border-accent/50 outline-none"
             placeholder="Any extra details, script ideas, footage you have, or special instructions."></textarea>
         </div>
 
       </div>
 
-      <!-- UPLOADS (FIXED SAFE WRAPPER) -->
+      <!-- UPLOADS -->
       <div class="space-y-3">
-        <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
+        <label for="upload-product" class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
           Product Image & Logo (Optional)
         </label>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 
-        <!-- PRODUCT IMAGE -->
-        <div
-          class="upload-box cursor-pointer bg-white/[0.03] border border-dashed border-white/20 rounded p-5 text-center
-                transition-all duration-300 hover:border-accent/60 hover:shadow-[0_0_25px_rgba(200,245,58,0.15)]"
-          ondrop="handleDrop(event, 'upload-product', 'product-preview')"
-          ondragover="event.preventDefault()"
-          onclick="document.getElementById('upload-product').click()"
-        >
+          <!-- PRODUCT IMAGE -->
+          <div
+            class="upload-box cursor-pointer bg-white/[0.03] border border-dashed border-white/20 rounded p-5 text-center
+                  transition-all duration-300 hover:border-accent/60 hover:shadow-[0_0_25px_rgba(200,245,58,0.15)]"
+            ondrop="handleDrop(event, 'upload-product', 'upload-product-preview')"
+            ondragover="event.preventDefault()"
+            onclick="document.getElementById('upload-product').click()">
 
-          <input type="file" id="upload-product" class="hidden" accept="image/*"
-            onchange="previewImage(event, 'product-preview')">
+            <input type="file" id="upload-product" name="product_image" class="hidden" accept="image/*"
+              autocomplete="off"
+              onchange="previewImage(event, 'upload-product-preview')">
 
-          <!-- PREVIEW -->
-          <div class="relative">
-            <img id="product-preview" class="hidden mx-auto mb-3 max-h-24 rounded object-contain" />
+            <div class="relative">
+              <img id="upload-product-preview" class="hidden mx-auto mb-3 max-h-24 rounded object-contain" alt="Product image preview" />
+              <button type="button"
+                onclick="removeImage(event, 'upload-product', 'upload-product-preview')"
+                class="hidden absolute top-0 right-0 text-xs bg-black/70 text-white px-2 py-1 rounded hover:bg-red-500 transition"
+                id="product-remove">
+                Remove
+              </button>
+            </div>
 
-            <button type="button"
-              onclick="removeImage(event, 'upload-product', 'product-preview')"
-              class="hidden absolute top-0 right-0 text-xs bg-black/70 text-white px-2 py-1 rounded hover:bg-red-500 transition"
-              id="product-remove">
-              Remove
-            </button>
+            <div class="text-white text-sm">Product Image</div>
+            <div class="text-white/40 text-xs mt-1">Drag & drop or click to upload</div>
           </div>
 
-          <div class="text-white text-sm">Product Image</div>
-          <div class="text-white/40 text-xs mt-1">Drag & drop or click to upload</div>
-        </div>
+          <!-- BRAND LOGO -->
+          <div
+            class="upload-box cursor-pointer bg-white/[0.03] border border-dashed border-white/20 rounded p-5 text-center
+                  transition-all duration-300 hover:border-accent/60 hover:shadow-[0_0_25px_rgba(200,245,58,0.15)]"
+            ondrop="handleDrop(event, 'upload-logo', 'upload-logo-preview')"
+            ondragover="event.preventDefault()"
+            onclick="document.getElementById('upload-logo').click()">
 
-        <!-- BRAND LOGO -->
-        <div
-          class="upload-box cursor-pointer bg-white/[0.03] border border-dashed border-white/20 rounded p-5 text-center
-                transition-all duration-300 hover:border-accent/60 hover:shadow-[0_0_25px_rgba(200,245,58,0.15)]"
-          ondrop="handleDrop(event, 'upload-logo', 'logo-preview')"
-          ondragover="event.preventDefault()"
-          onclick="document.getElementById('upload-logo').click()"
-        >
+            <input type="file" id="upload-logo" name="brand_logo" class="hidden" accept="image/*"
+              autocomplete="off"
+              onchange="previewImage(event, 'upload-logo-preview')">
 
-          <input type="file" id="upload-logo" class="hidden" accept="image/*"
-            onchange="previewImage(event, 'logo-preview')">
+            <div class="relative">
+              <img id="upload-logo-preview" class="hidden mx-auto mb-3 max-h-16 rounded object-contain" alt="Brand logo preview" />
+              <button type="button"
+                onclick="removeImage(event, 'upload-logo', 'upload-logo-preview')"
+                class="hidden absolute top-0 right-0 text-xs bg-black/70 text-white px-2 py-1 rounded hover:bg-red-500 transition"
+                id="logo-remove">
+                Remove
+              </button>
+            </div>
 
-          <!-- PREVIEW -->
-          <div class="relative">
-            <img id="logo-preview" class="hidden mx-auto mb-3 max-h-16 rounded object-contain" />
-
-            <button type="button"
-              onclick="removeImage(event, 'upload-logo', 'logo-preview')"
-              class="hidden absolute top-0 right-0 text-xs bg-black/70 text-white px-2 py-1 rounded hover:bg-red-500 transition"
-              id="logo-remove">
-              Remove
-            </button>
+            <div class="text-white text-sm">Brand Logo</div>
+            <div class="text-white/40 text-xs mt-1">Drag & drop or click to upload</div>
           </div>
-
-          <div class="text-white text-sm">Brand Logo</div>
-          <div class="text-white/40 text-xs mt-1">Drag & drop or click to upload</div>
-        </div>
 
         </div>
       </div>
 
       <!-- EXTRAS -->
       <div class="space-y-3">
-        <label class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
+        <p class="text-[0.7rem] font-mono tracking-[0.12em] uppercase text-white/45">
           Extras (Optional)
-        </label>
+        </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
 
           <!-- VOICEOVER -->
           <div class="space-y-2">
-
             <button type="button"
               onclick="toggleExtra(this, 'voiceover-opts')"
               class="extra-btn h-[52px] w-full bg-white/[0.03] border border-white/[0.07]
                     rounded font-mono text-[0.72rem] uppercase tracking-[0.08em]
                     text-white/60 transition-all duration-300
                     hover:border-accent/60 hover:text-white/80">
-
               Voiceover — $10
             </button>
-
             <div id="voiceover-opts" class="hidden">
-              <select
+              <label for="voiceover-accent" class="sr-only">Voiceover accent</label>
+              <select id="voiceover-accent" name="voiceover_accent"
+                autocomplete="off"
                 class="w-full bg-[#1a1a1a] border border-white/[0.07] rounded px-3 py-2
                       font-mono text-[0.72rem] text-white/70 uppercase tracking-[0.06em]
                       focus:border-accent/50 outline-none cursor-pointer">
@@ -878,24 +1010,22 @@
                 <option value="asian">Asian — $10</option>
               </select>
             </div>
-
           </div>
 
           <!-- VARIATIONS -->
           <div class="space-y-2">
-
             <button type="button"
               onclick="toggleExtra(this, 'variations-opts')"
               class="extra-btn h-[52px] w-full bg-white/[0.03] border border-white/[0.07]
                     rounded font-mono text-[0.72rem] uppercase tracking-[0.08em]
                     text-white/60 transition-all duration-300
                     hover:border-accent/60 hover:text-white/80">
-
               + Variations
             </button>
-
             <div id="variations-opts" class="hidden">
-              <select
+              <label for="variations-qty" class="sr-only">Number of variations</label>
+              <select id="variations-qty" name="variations_qty"
+                autocomplete="off"
                 class="w-full bg-[#1a1a1a] border border-white/[0.07] rounded px-3 py-2
                       font-mono text-[0.72rem] text-white/70 uppercase tracking-[0.06em]
                       focus:border-accent/50 outline-none cursor-pointer">
@@ -905,7 +1035,6 @@
                 <option value="5">5 Variations — $40</option>
               </select>
             </div>
-
           </div>
 
           <!-- THUMBNAIL -->
@@ -915,12 +1044,12 @@
                   rounded font-mono text-[0.72rem] uppercase tracking-[0.08em]
                   text-white/60 transition-all duration-300
                   hover:border-accent/60 hover:text-white/80">
-
             Thumbnail — $10
           </button>
 
         </div>
       </div>
+
       <!-- BUTTON -->
       <button type="submit"
         class="w-full bg-accent text-black py-[18px] rounded font-mono font-bold tracking-[0.1em] uppercase hover:bg-[#d6ff44] transition">
@@ -934,7 +1063,6 @@
     </form>
   </div>
 </section>
- 
  
   <!-- FOOTER-->
   <footer class="bg-black border-t border-white/[0.07] px-[5%] py-12 flex items-center justify-between flex-wrap gap-6">

@@ -79,6 +79,55 @@ tailwind.config = {
       },
     };
 
+    
+    /* ── Scroll reveal ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+ 
+    /* ── Extra toggles ── */
+    function toggleExtra(btn, subId) {
+      btn.classList.toggle('active');
+      const isActive = btn.classList.contains('active');
+      btn.style.borderColor = isActive ? '#c8f53a' : '';
+      btn.style.background  = isActive ? 'rgba(200,245,58,0.07)' : '';
+      const label = btn.querySelector('.extra-toggle-label');
+      if (label) label.style.color = isActive ? '#c8f53a' : '';
+      if (subId) {
+        const sub = document.getElementById(subId);
+        if (sub) sub.classList.toggle('visible', isActive);
+      }
+    }
+ 
+    /* ── File upload preview ── */
+    function handleUpload(input, previewId, nameId) {
+      const file = input.files[0];
+      if (!file) return;
+      const box = input.closest('.upload-box');
+      box.classList.add('has-file');
+      document.getElementById(nameId).textContent = file.name;
+      const preview = document.getElementById(previewId);
+      preview.src = URL.createObjectURL(file);
+      preview.classList.remove('hidden');
+      const icon = box.querySelector('.upload-icon');
+      if (icon) icon.style.display = 'none';
+    }
+ 
+    /* ── Form submit ── */
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.submit-btn') || e.target.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.textContent = 'Order Received! ✓';
+        btn.style.background = '#3affa3';
+        setTimeout(() => {
+          btn.textContent = 'Submit My Order →';
+          btn.style.background = '';
+        }, 3000);
+      }
+    }
+
 // ─── CONFIG ───────────────────────────────────────────────────
 const CONFIG = {
   SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbw86YM14CXf9tWfuxo-vMC-zgIrQKegwyGQ_2NzJ9aH8beC7dk5aBXei5E5wRCNMUop/exec',
@@ -146,6 +195,16 @@ function handleUpload(input, previewId, nameId) {
 }
 
 // =============================================================
+//  EXTRAS TOGGLE
+// =============================================================
+function toggleExtra(el, subId) {
+  el.classList.toggle('active');
+  if (subId) {
+    document.getElementById(subId)?.classList.toggle('visible');
+  }
+}
+
+// =============================================================
 //  PRICE CALCULATOR
 // =============================================================
 function calcTotal() {
@@ -205,8 +264,13 @@ function resetForm() {
   // Clear image previews
   ['upload-product-preview', 'upload-logo-preview'].forEach((id) => {
     const el = document.getElementById(id);
-    if (el) { el.style.display = 'none'; el.src = ''; }
+    if (el) { el.classList.add('hidden'); el.src = ''; }
   });
+
+    ['product-remove', 'logo-remove'].forEach((id) => {
+      const btn = document.getElementById(id);
+      if (btn) btn.classList.add('hidden');
+    });
 
   // Reset upload labels
   const labels = {
@@ -228,31 +292,40 @@ function resetForm() {
 //  PAYMENT POPUP
 // =============================================================
 function showPaymentPopup(total, custEmail, productName, pkg) {
+
   document.getElementById('payment-overlay')?.remove();
 
   const overlay = document.createElement('div');
-  overlay.id    = 'payment-overlay';
-  Object.assign(overlay.style, {
-    position:      'fixed',
-    inset:         '0',
-    background:    'rgba(8,8,8,0.92)',
-    zIndex:        '9998',
-    display:       'flex',
-    alignItems:    'center',
-    justifyContent:'center',
-    padding:       '20px',
-    backdropFilter:'blur(8px)',
-  });
+  overlay.id = 'payment-overlay';
+
+// Replace your setAttribute style block with this:
+  overlay.setAttribute('style', `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8,8,8,0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+  `);
 
   overlay.innerHTML = `
     <div style="background:#141414;border:1px solid rgba(200,245,58,0.3);border-radius:10px;
-                padding:36px 32px;max-width:460px;width:100%;position:relative;">
+                padding:36px 32px;max-width:460px;width:100%;position:relative;
+                margin: auto;">
 
       <button id="close-payment-btn"
         style="position:absolute;top:14px;right:16px;background:none;border:none;
                color:rgba(245,245,240,0.4);font-size:1.2rem;cursor:pointer;line-height:1;">&#10005;</button>
 
-      <!-- Header -->
       <div style="text-align:center;margin-bottom:24px;">
         <div style="width:52px;height:52px;border-radius:50%;background:rgba(200,245,58,0.1);
                     border:1px solid rgba(200,245,58,0.35);display:flex;align-items:center;
@@ -269,7 +342,6 @@ function showPaymentPopup(total, custEmail, productName, pkg) {
         </p>
       </div>
 
-      <!-- Order summary -->
       <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
                   border-radius:6px;padding:16px;margin-bottom:20px;">
         <p style="font-size:0.72rem;font-family:'Space Mono',monospace;letter-spacing:0.1em;
@@ -286,7 +358,6 @@ function showPaymentPopup(total, custEmail, productName, pkg) {
         </div>
       </div>
 
-      <!-- Stripe fields -->
       <div style="margin-bottom:16px;display:flex;flex-direction:column;gap:10px;">
         <div>
           <label style="font-size:0.72rem;font-family:'Space Mono',monospace;letter-spacing:0.1em;
@@ -320,7 +391,6 @@ function showPaymentPopup(total, custEmail, productName, pkg) {
         <div id="stripe-card-errors" style="color:#ff6b6b;font-size:0.78rem;min-height:18px;"></div>
       </div>
 
-      <!-- Pay button -->
       <button id="stripe-pay-btn"
         style="width:100%;background:#c8f53a;color:#080808;font-family:'Space Mono',monospace;
                font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
@@ -328,7 +398,6 @@ function showPaymentPopup(total, custEmail, productName, pkg) {
         Pay $${total} USD
       </button>
 
-      <!-- Trust badge -->
       <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
              stroke="rgba(245,245,240,0.3)" stroke-width="2">
@@ -341,20 +410,38 @@ function showPaymentPopup(total, custEmail, productName, pkg) {
       </div>
     </div>`;
 
+  // ✅ Append to <body> and lock scroll
   document.body.appendChild(overlay);
 
-  // Wire up close button after DOM insertion
-  document.getElementById('close-payment-btn').addEventListener('click', () => {
-    overlay.remove();
-    resetBtn();
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
   });
 
-  // Wire up pay button after DOM insertion
+  function closeModal() {
+    overlay.remove();
+  }
+
+  document.getElementById('close-payment-btn').addEventListener('click', () => {
+    // Unmount Stripe elements cleanly before removing from DOM
+    if (state.cardElement) {
+      state.cardElement.unmount();
+      state.cardElement = null;
+    }
+
+    // Clear the error message
+    const errEl = document.getElementById('stripe-card-errors');
+    if (errEl) errEl.textContent = '';
+
+    // Reset the pay button
+    resetBtn();
+
+    closeModal();
+  });
+
   document.getElementById('stripe-pay-btn').addEventListener('click', () => {
     handleStripePayment(total, custEmail);
   });
 
-  // Init Stripe elements
   setTimeout(() => {
     state.stripe ??= Stripe(CONFIG.STRIPE_PK);
 
@@ -369,7 +456,6 @@ function showPaymentPopup(total, custEmail, productName, pkg) {
 
     state.cardElement = cardNumber;
 
-    // Live error display
     const showError = (e) => {
       const el = document.getElementById('stripe-card-errors');
       if (el) el.textContent = e.error?.message ?? '';
@@ -386,9 +472,9 @@ async function handleStripePayment(total, custEmail) {
   if (!btn || !state.cardElement) return;
 
   // Loading state
-  btn.textContent    = 'Processing...';
-  btn.disabled       = true;
-  btn.style.opacity  = '0.6';
+  btn.textContent   = 'Processing...';
+  btn.disabled      = true;
+  btn.style.opacity = '0.6';
 
   const setError = (msg) => {
     const el = document.getElementById('stripe-card-errors');
@@ -396,6 +482,7 @@ async function handleStripePayment(total, custEmail) {
     btn.textContent   = `Pay $${total} USD`;
     btn.disabled      = false;
     btn.style.opacity = '1';
+    showErrorNotif(msg); // ✅ show error notification
   };
 
   try {
@@ -417,11 +504,26 @@ async function handleStripePayment(total, custEmail) {
     if (error) {
       setError(error.message);
     } else if (paymentIntent?.status === 'succeeded') {
+      showSuccessNotif();          // ✅ show success notification
+      showOrderComplete(custEmail); // shows the full confirmation overlay
       submitOrderToSheets(custEmail);
     }
   } catch (err) {
     setError(err.message);
   }
+}
+
+function handleStripePayment(total, custEmail) {
+  const btn = document.getElementById('stripe-pay-btn');
+
+  btn.textContent = 'Processing...';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    console.log("Mock payment success");
+
+    submitOrderToSheets(custEmail); // ✅ triggers email
+  }, 1500);
 }
 
 // =============================================================
@@ -445,24 +547,29 @@ function submitOrderToSheets(custEmail) {
 // =============================================================
 function showOrderComplete(custEmail) {
   document.getElementById('payment-overlay')?.remove();
+  document.getElementById('done-overlay')?.remove();
 
   const done = document.createElement('div');
   done.id = 'done-overlay';
-  Object.assign(done.style, {
-    position:       'fixed',
-    inset:          '0',
-    background:     'rgba(8,8,8,0.92)',
-    zIndex:         '9999',
-    display:        'flex',
-    alignItems:     'center',
-    justifyContent: 'center',
-    padding:        '20px',
-    backdropFilter: 'blur(8px)',
-  });
+
+  done.setAttribute('style', `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8,8,8,0.92);
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+  `);
 
   done.innerHTML = `
     <div style="background:#141414;border:1px solid rgba(200,245,58,0.35);border-radius:10px;
-                padding:44px 36px;max-width:440px;width:100%;text-align:center;">
+                padding:44px 36px;max-width:440px;width:100%;text-align:center;position:relative;">
       <div style="width:60px;height:60px;border-radius:50%;background:rgba(200,245,58,0.12);
                   border:1px solid rgba(200,245,58,0.4);display:flex;align-items:center;
                   justify-content:center;margin:0 auto 20px;">
@@ -490,7 +597,26 @@ function showOrderComplete(custEmail) {
     </div>`;
 
   document.body.appendChild(done);
-  document.getElementById('done-close-btn').addEventListener('click', () => done.remove());
+
+  const prevOverflow     = document.body.style.overflow;
+  const prevHtmlOverflow = document.documentElement.style.overflow;
+  document.body.style.overflow            = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
+  window.scrollTo({ top: 0, behavior: 'instant' });
+
+  function closeDone() {
+    done.remove();
+    document.body.style.overflow            = prevOverflow;
+    document.documentElement.style.overflow = prevHtmlOverflow;
+  }
+
+  // Close on Done button
+  document.getElementById('done-close-btn').addEventListener('click', closeDone);
+
+  // Close on backdrop click
+  done.addEventListener('click', (e) => {
+    if (e.target === done) closeDone();
+  });
 
   // Reset everything
   resetForm();
@@ -519,14 +645,35 @@ async function handleSubmit(evt) {
   const pkg         = packageEl.options[packageEl.selectedIndex].text;
   const notes       = document.getElementById('description').value.trim();
 
-  // Build extras string
+  // Build extras string (FIXED)
   const extrasArr = [];
-  document.querySelectorAll('.extra-toggle.active').forEach((toggle) => {
-    let label = toggle.querySelector('.extra-toggle-label')?.textContent.trim() ?? '';
-    const sel = toggle.closest('.extra-item')?.querySelector('.extra-select');
-    if (sel?.value) label += ` (${sel.options[sel.selectedIndex].text})`;
-    extrasArr.push(label);
-  });
+
+  // VOICEOVER
+  const voiceBtn = document.querySelector('[onclick*="voiceover-opts"]');
+  const voiceSel = document.querySelector('#voiceover-opts select');
+
+  if (voiceBtn?.classList.contains('border-accent')) {
+    const text = voiceSel?.selectedOptions?.[0]?.text;
+    extrasArr.push(text ? `Voiceover (${text})` : 'Voiceover');
+  }
+
+  // VARIATIONS
+  const varBtn = document.querySelector('[onclick*="variations-opts"]');
+  const varSel = document.querySelector('#variations-opts select');
+
+  if (varBtn?.classList.contains('border-accent')) {
+    const text = varSel?.selectedOptions?.[0]?.text;
+    extrasArr.push(text ? `Variations (${text})` : 'Variations');
+  }
+
+  // THUMBNAIL
+  const thumbBtn = [...document.querySelectorAll('.extra-btn')]
+    .find(btn => btn.textContent.includes('Thumbnail'));
+
+  if (thumbBtn?.classList.contains('border-accent')) {
+    extrasArr.push('Thumbnail');
+  }
+
   const extras = extrasArr.length ? extrasArr.join(' | ') : 'None';
 
   const total = calcTotal();
@@ -570,6 +717,91 @@ async function handleSubmit(evt) {
   btn.style.opacity  = '1';
 
   showPaymentPopup(total, custEmail, productName, pkg);
+}
+
+function showSuccessNotif() {
+  showNotif('Payment successful! Order confirmed.', 'success');
+}
+
+function showErrorNotif(message) {
+  showNotif(message || 'Payment failed. Please try again.', 'error');
+}
+
+function showNotif(message, type) {
+  // Remove any existing notif
+  document.getElementById('payment-notif')?.remove();
+
+  const isSuccess = type === 'success';
+
+  const notif = document.createElement('div');
+  notif.id = 'payment-notif';
+
+  notif.setAttribute('style', `
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 2147483647;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #141414;
+    border: 1px solid ${isSuccess ? 'rgba(200,245,58,0.4)' : 'rgba(255,80,80,0.4)'};
+    border-left: 3px solid ${isSuccess ? '#c8f53a' : '#ff4f4f'};
+    border-radius: 6px;
+    padding: 14px 16px;
+    max-width: 340px;
+    width: calc(100vw - 48px);
+    box-sizing: border-box;
+    transform: translateX(120%);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  `);
+
+  notif.innerHTML = `
+    <div style="flex-shrink:0;width:32px;height:32px;border-radius:50%;
+                background:${isSuccess ? 'rgba(200,245,58,0.1)' : 'rgba(255,79,79,0.1)'};
+                border:1px solid ${isSuccess ? 'rgba(200,245,58,0.3)' : 'rgba(255,79,79,0.3)'};
+                display:flex;align-items:center;justify-content:center;">
+      ${isSuccess
+        ? `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8f53a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
+        : `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff4f4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+      }
+    </div>
+    <div style="flex:1;min-width:0;">
+      <p style="font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.08em;
+                text-transform:uppercase;color:${isSuccess ? '#c8f53a' : '#ff4f4f'};
+                margin:0 0 4px;font-weight:700;">
+        ${isSuccess ? 'Payment Successful' : 'Payment Failed'}
+      </p>
+      <p style="font-size:0.82rem;color:rgba(245,245,240,0.65);margin:0;line-height:1.5;">
+        ${message}
+      </p>
+    </div>
+    <button id="notif-close-btn" style="flex-shrink:0;background:none;border:none;
+              color:rgba(245,245,240,0.3);font-size:1rem;cursor:pointer;
+              line-height:1;padding:0;margin-top:1px;">&#10005;</button>
+  `;
+
+  document.body.appendChild(notif);
+
+  // Slide in
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      notif.style.transform = 'translateX(0)';
+    });
+  });
+
+  // Auto dismiss
+  const dismissAfter = isSuccess ? 5000 : 8000;
+  let autoTimer = setTimeout(() => dismiss(), dismissAfter);
+
+  function dismiss() {
+    clearTimeout(autoTimer);
+    notif.style.transform = 'translateX(120%)';
+    setTimeout(() => notif.remove(), 350);
+  }
+
+  document.getElementById('notif-close-btn').addEventListener('click', dismiss);
 }
 
 // =============================================================
@@ -683,24 +915,3 @@ function handleDrop(event, inputId, previewId) {
 
   previewImage({ target: input }, previewId);
 }
-
-document.querySelectorAll('[data-package]').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const packageValue = btn.dataset.package;
-    const price = btn.dataset.price;
-
-    // set package dropdown
-    const packageSelect = document.getElementById('package');
-    if (packageSelect) {
-      packageSelect.value = packageValue;
-      packageSelect.dispatchEvent(new Event('change'));
-    }
-
-    // optional: scroll to form
-    document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' });
-
-    console.log("Selected package:", packageValue, price);
-  });
-});
