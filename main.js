@@ -513,18 +513,18 @@ async function handleStripePayment(total, custEmail) {
   }
 }
 
-function handleStripePayment(total, custEmail) {
-  const btn = document.getElementById('stripe-pay-btn');
+// function handleStripePayment(total, custEmail) {
+//   const btn = document.getElementById('stripe-pay-btn');
 
-  btn.textContent = 'Processing...';
-  btn.disabled = true;
+//   btn.textContent = 'Processing...';
+//   btn.disabled = true;
 
-  setTimeout(() => {
-    console.log("Mock payment success");
+//   setTimeout(() => {
+//     console.log("Mock payment success");
 
-    submitOrderToSheets(custEmail); // ✅ triggers email
-  }, 1500);
-}
+//     submitOrderToSheets(custEmail); // ✅ triggers email
+//   }, 1500);
+// }
 
 // =============================================================
 //  SUBMIT ORDER TO GOOGLE SHEETS (after payment)
