@@ -818,39 +818,75 @@ btn.addEventListener("click", () => {
 menu.classList.toggle("hidden");
 });
 
-const track = document.getElementById("carouselTrack");
+const outer = document.getElementById('carouselOuter');
+const track = document.getElementById('carouselTrack');
+
+// Duplicate for infinite loop
 track.innerHTML += track.innerHTML;
 
-let index = 0;
-const step = 240;
-const total = track.children.length / 2;
+const CARD_W = 240;
+const GAP    = 20;
+const STEP   = CARD_W + GAP;
+const TOTAL  = track.children.length / 2;
 
-function updateCarousel() {
-  track.style.transition = "transform 0.3s ease";
-  track.style.transform = `translate3d(${-index * step}px, 0, 0)`;
+let index   = 0;
+let offset  = 0;   // live drag offset in px
+let dragX   = 0;
+let isDragging = false;
+
+function setTranslate(px, animate) {
+  track.style.transition = animate
+    ? 'transform 0.4s cubic-bezier(0.25,0.8,0.25,1)'
+    : 'none';
+  track.style.transform = `translate3d(${px}px, 0, 0)`;
 }
 
-// BUTTON = instant next/prev (TikTok snap)
-function moveCarousel(dir) {
-  index += dir;
-
-  // loop safely within real items only
-  if (index >= total) index = 0;
-  if (index < 0) index = total - 1;
-
-  updateCarousel();
+function snapTo(i) {
+  // Seamless loop boundary
+  if (i >= TOTAL) { i = 0; setTranslate(-i * STEP, false); }
+  if (i < 0)      { i = TOTAL - 1; setTranslate(-i * STEP, false); }
+  index = i;
+  setTranslate(-index * STEP, true);
 }
 
-// AUTO LOOP (runs independently, same logic as button)
+// ── Pointer events (mouse + touch unified) ──────────────────────
+outer.addEventListener('pointerdown', e => {
+  isDragging = true;
+  dragX = e.clientX;
+  offset = -index * STEP;
+  outer.style.cursor = 'grabbing';
+  track.style.transition = 'none';
+  outer.setPointerCapture(e.pointerId);
+});
+
+outer.addEventListener('pointermove', e => {
+  if (!isDragging) return;
+  const delta = e.clientX - dragX;
+  setTranslate(offset + delta, false);
+});
+
+outer.addEventListener('pointerup', e => {
+  if (!isDragging) return;
+  isDragging = false;
+  outer.style.cursor = 'grab';
+  const delta = e.clientX - dragX;
+  const moved = Math.round(-delta / STEP);  // cards dragged past
+  snapTo(index + (moved || (delta < -40 ? 1 : delta > 40 ? -1 : 0)));
+});
+
+outer.addEventListener('pointercancel', () => {
+  isDragging = false;
+  outer.style.cursor = 'grab';
+  snapTo(index);
+});
+
+// ── Auto-advance ─────────────────────────────────────────────────
 setInterval(() => {
-  index++;
-
-  if (index >= total) {
-    index = 0;
-  }
-
-  updateCarousel();
+  if (!isDragging) snapTo(index + 1);
 }, 5000);
+
+// ── Prevent drag from triggering video click / text selection ────
+outer.addEventListener('dragstart', e => e.preventDefault());
 
 function toggleExtra(btn, targetId) {
 

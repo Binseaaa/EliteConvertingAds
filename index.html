@@ -107,7 +107,7 @@
   </nav>
  
   <!-- HERO-->
-<section class="relative min-h-screen flex-col justify-between px-[5%] pt-[50px] pb-[40px]">
+<section class="relative min-h-screen flex-col justify-between pt-[50px] pb-[40px]">
   <!-- BACKGROUND GLOW -->
   <div class="absolute w-[800px] h-[800px] bg-accent/10 blur-[140px] rounded-full opacity-40 -top-40 -right-40"></div>
 
@@ -151,158 +151,150 @@
 
   </div>
  
-  <!-- BOTTOM CAROUSEL -->
-  <div class="relative w-full mt-6">
+<!-- BOTTOM CAROUSEL -->
+<div class="relative w-full mt-6 overflow-hidden"
+    style="cursor: grab; user-select: none;"
+    id="carouselOuter">
 
-    <!-- LEFT ARROW -->
-    <button onclick="moveCarousel(-1)"
-      class="absolute left-4 top-1/2 -translate-y-1/2 z-20
-             bg-black/40 border border-white/10 p-3 rounded-full
-             hover:bg-black/70 transition">
-      ‹
-    </button>
+  <!-- TRACK -->
+  <div id="carouselTrack"
+    class="flex gap-5 w-max"
+    style="will-change: transform;">
 
-    <!-- RIGHT ARROW -->
-    <button onclick="moveCarousel(1)"
-      class="absolute right-4 top-1/2 -translate-y-1/2 z-20
-             bg-black/40 border border-white/10 p-3 rounded-full
-             hover:bg-black/70 transition">
-      ›
-    </button>
-
-    <!-- TRACK -->
-    <div id="carouselTrack"
-      class="flex gap-5 w-max transition-transform duration-500 ease-in-out">
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-          <video
-            class="w-full h-full object-cover opacity-0 transition-opacity duration-700"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="auto"
-            oncanplay="this.classList.remove('opacity-0')"
-          >
-          <source src="ASSETS/videos/4Mode Faucet.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-              <video
-              class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              oncanplay="this.classList.remove('opacity-0')"
-      >
-          <source src="ASSETS/videos/Intense Pulsed Light - 101 2x.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-              <video
-        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        oncanplay="this.classList.remove('opacity-0')"
-      >
-          <source src="ASSETS/videos/RipSurf Skateboard - 101.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-              <video
-        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        oncanplay="this.classList.remove('opacity-0')"
-      >
-          <source src="ASSETS/videos/Robot - 101.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-              <video
-        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        oncanplay="this.classList.remove('opacity-0')"
-      >
-          <source src="ASSETS/videos/Shoe Cleaner 9x16.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-              <video
-        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        oncanplay="this.classList.remove('opacity-0')"
-      >
-          <source src="ASSETS/videos/Triple Monitor - 101.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-              <video
-        class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        oncanplay="this.classList.remove('opacity-0')"
-      >
-          <source src="ASSETS/videos/4Mode Faucet.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-          <source src="ASSETS/videos/Intense Pulsed Light - 101 2x.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-          <source src="ASSETS/videos/RipSurf Skateboard - 101.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-          <source src="ASSETS/videos/Robot - 101.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-          <source src="ASSETS/videos/Shoe Cleaner 9x16.mp4">
-        </video>
-      </div>
-
-      <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10">
-        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-          <source src="ASSETS/videos/Triple Monitor - 101.mp4">
-        </video>
-      </div>
+    <!-- 1. 4Mode Faucet -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/TikTok/4Mode Faucet.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/4Mode Faucet.mp4#t=0.1">
+      </video>
     </div>
+
+    <!-- 2. Intense Pulsed Light -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/Meta Ads/Intense Pulsed Light - 101.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/Intense Pulsed Light - 101 2x.mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 3. RipSurf Skateboard -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/TikTok/RipSurf Skateboard.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/RipSurf Skateboard - 101.mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 4. Robot -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/Meta Ads/Robot - 101.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/Robot - 101.mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 5. Shoe Cleaner -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/TikTok/Shoe Cleaner.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/Shoe Cleaner 9x16.mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 6. Triple Monitor -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/Meta Ads/Triple Monitor - 101.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/Triple Monitor - 101.mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 7. A-Maze Ball -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/Meta Ads/A Maze Ball.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/A-Maze Ball .mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 8. Lint Remover -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/Meta Ads/Lint Remover.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/Lint Remover.mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 9. Mosquito Bracelet -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/TikTok/Mosquito Bracelet .png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/Mosquito Bracelet.mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 10. Sunscreen Applicator -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/Meta Ads/Sunscreen Applicator.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/Sunscreen Applicator.mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 11. Waterproof Phone Holder -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/TikTok/Water Proof PhoneHolder.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/Waterproof PhoneHolder.mp4#t=0.1">
+      </video>
+    </div>
+
+    <!-- 12. Wholefacemask Machine -->
+    <div class="w-[240px] h-[380px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10 relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+           style="background-image: url('ASSETS/images/TikTok/Wholefacemask Maker Machine.png'); filter: blur(6px); transform: scale(1.05);"></div>
+      <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+             autoplay muted loop playsinline
+             onloadeddata="this.classList.remove('opacity-0')">
+        <source src="ASSETS/videos/Wholefacemask machine.mp4#t=0.1">
+      </video>
+    </div>
+
   </div>
+</div>
 </section>
  
   <!-- TICKER-->
@@ -319,140 +311,291 @@
     </div>
   </div>
  
-  <!-- EXAMPLES-->
-  <section id="examples" class="py-[100px] px-[5%] bg-[#101010]">
- 
-    <div class="examples-header reveal text-center mb-16">
-      <div class="section-label inline-flex items-center gap-[10px] font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent mb-4 justify-center">
-        Examples
-      </div>
-      <h2 class="font-display text-[clamp(2.4rem,4.5vw,3.8rem)] leading-none tracking-[0.01em] mb-4">Elite Ads in Action</h2>
-      <p class="text-[1rem] text-white/45 max-w-[480px] font-light mx-auto">
-        Built for the formats that convert — native-feeling, platform-optimized, scroll-stopping.
-      </p>
+<!-- EXAMPLES-->
+<section id="examples" class="py-[100px] px-[5%] bg-[#101010]">
+
+  <div class="examples-header reveal text-center mb-16">
+    <div class="section-label inline-flex items-center gap-[10px] font-mono text-[0.7rem] tracking-[0.2em] uppercase text-accent mb-4 justify-center">
+      Examples
     </div>
- 
-    <!-- 9:16 Group -->
-    <div class="format-group reveal mb-[60px]">
-      <div class="font-mono text-[0.68rem] tracking-[0.18em] uppercase text-white/45 mb-6 pb-3 border-b border-white/[0.07]">
-        <span class="text-accent mr-2">9:16</span> TikTok · Stories · Reels
-      </div>
-      <div class="grid grid-cols-3 gap-3 max-w-[900px]">
+    <h2 class="font-display text-[clamp(2.4rem,4.5vw,3.8rem)] leading-none tracking-[0.01em] mb-4">Elite Ads in Action</h2>
+    <p class="text-[1rem] text-white/45 max-w-[480px] font-light mx-auto">
+      Built for the formats that convert — native-feeling, platform-optimized, scroll-stopping.
+    </p>
+  </div>
 
-        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
-            style="aspect-ratio:9/16;"
-            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
-          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
-            <source src="ASSETS/videos/4Mode Faucet.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
-              style="background:rgba(8,8,8,0.35);">
-            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
-            style="aspect-ratio:9/16;"
-            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
-          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
-            <source src="ASSETS/videos/Mini Shaver.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
-              style="background:rgba(8,8,8,0.35);">
-            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
-            style="aspect-ratio:9/16;"
-            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
-          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
-            <source src="ASSETS/videos/RipSurf Skateboard - 101.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
-              style="background:rgba(8,8,8,0.35);">
-            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- 9:16 Group -->
+  <div class="format-group reveal mb-[60px]">
+    <div class="font-mono text-[0.68rem] tracking-[0.18em] uppercase text-white/45 mb-6 pb-3 border-b border-white/[0.07]">
+      <span class="text-accent mr-2">9:16</span> TikTok · Stories · Reels
     </div>
+    <div class="grid grid-cols-6 gap-3">
 
-    <!-- 1:1 Group -->
-    <div class="format-group reveal">
-      <div class="font-mono text-[0.68rem] tracking-[0.18em] uppercase text-white/45
-                  mb-6 pb-3 border-b border-white/[0.07]">
-        <span class="text-accent mr-2">1:1</span> Meta Feed Ads
-      </div>
-      <div class="grid grid-cols-3 gap-3 max-w-[900px]">
-
-        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
-            style="aspect-ratio:1/1;"
-            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
-          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
-            <source src="ASSETS/videos/Intense Pulsed Light - 101 2x.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
-              style="background:rgba(8,8,8,0.35);">
-            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
-            style="aspect-ratio:1/1;"
-            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
-          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
-            <source src="ASSETS/videos/Robot - 101.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
-              style="background:rgba(8,8,8,0.35);">
-            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
-            style="aspect-ratio:1/1;"
-            onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
-          <video class="absolute inset-0 w-full h-full object-cover" loop playsinline>
-            <source src="ASSETS/videos/Triple Monitor - 101.mp4" type="video/mp4">
-          </video>
-          <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
-              style="background:rgba(8,8,8,0.35);">
-            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-                style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
-            </div>
+      <!-- 4Mode Faucet -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:9/16;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/TikTok/4Mode Faucet.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/4Mode Faucet.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
           </div>
         </div>
       </div>
+
+      <!-- Mini Shaver -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:9/16;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/TikTok/Mini Shaver.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/Mini Shaver.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- RipSurf Skateboard -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:9/16;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/TikTok/RipSurf Skateboard.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/RipSurf Skateboard - 101.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mosquito Bracelet -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:9/16;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/TikTok/Mosquito Bracelet .png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/Mosquito Bracelet.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Waterproof Phone Holder -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:9/16;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/TikTok/Water Proof PhoneHolder.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/Waterproof PhoneHolder.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wholefacemask Machine -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:9/16;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/TikTok/Wholefacemask Maker Machine.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/Wholefacemask machine.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+
+  <!-- 1:1 Group -->
+  <div class="format-group reveal">
+    <div class="font-mono text-[0.68rem] tracking-[0.18em] uppercase text-white/45 mb-6 pb-3 border-b border-white/[0.07]">
+      <span class="text-accent mr-2">1:1</span> Meta Feed Ads
+    </div>
+    <div class="grid grid-cols-6 gap-3">
+
+      <!-- Intense Pulsed Light -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:1/1;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/Meta Ads/Intense Pulsed Light - 101.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/Intense Pulsed Light - 101 2x.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Robot -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:1/1;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/Meta Ads/Robot - 101.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/Robot - 101.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Triple Monitor -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:1/1;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/Meta Ads/Triple Monitor - 101.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/Triple Monitor - 101.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- A-Maze Ball -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:1/1;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/Meta Ads/A Maze Ball.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/A-Maze Ball .mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lint Remover -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:1/1;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/Meta Ads/Lint Remover.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/Lint Remover.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunscreen Applicator -->
+      <div class="relative group cursor-pointer rounded-xl overflow-hidden border border-white/10"
+          style="aspect-ratio:1/1;"
+          onclick="this.querySelector('video').paused ? (this.querySelector('video').play(), this.querySelector('.play-overlay').style.opacity=0) : (this.querySelector('video').pause(), this.querySelector('.play-overlay').style.opacity=1)">
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('ASSETS/images/Meta Ads/Sunscreen Applicator.png'); filter: blur(6px); transform: scale(1.05);"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" loop playsinline
+               onloadeddata="this.classList.remove('opacity-0')">
+          <source src="ASSETS/videos/Sunscreen Applicator.mp4#t=0.1" type="video/mp4">
+        </video>
+        <div class="play-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+            style="background:rgba(8,8,8,0.35);">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style="background:rgba(200,245,58,0.15);border:1.5px solid rgba(200,245,58,0.6);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#c8f53a" style="margin-left:3px;">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- HOW IT WORKS-->
 <section id="process" class="py-[100px] px-[5%] bg-black">
@@ -667,7 +810,7 @@
  
  
   <!-- PACKAGES -->
-<section id="packages" class="py-20 md:py-[100px] px-5 md:px-[5%] bg-black">
+<section id="packages" class="py-20 md:py-[100px] px-5 md:px-[5%] bg-black"6
 
   <!-- Header -->
   <div class="text-center mb-12 md:mb-[60px] max-w-2xl mx-auto">
@@ -810,7 +953,7 @@
  
  
 <!-- ORDER FORM -->
-<section id="order" class="py-[100px] px-[5%] bg-[#101010]">
+<section id="order" class="py-[100px] px-[5%] bg-[#101010]"6
   <div class="max-w-[720px] mx-auto">
 
     <!-- HEADER -->
