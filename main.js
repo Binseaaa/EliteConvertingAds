@@ -1,132 +1,83 @@
 'use strict';
 
 tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            black:   '#080808',
-            'off-black': '#101010',
-            card:    '#141414',
-            white:   '#f5f5f0',
-            muted:   'rgba(245,245,240,0.45)',
-            accent:  '#c8f53a',
-            accent2: '#3affa3',
-            'accent-glow': 'rgba(200,245,58,0.18)',
-            border:  'rgba(255,255,255,0.07)',
-          },
-          fontFamily: {
-            display: ['"Bebas Neue"', 'sans-serif'],
-            body:    ['"DM Sans"',    'sans-serif'],
-            mono:    ['"Space Mono"', 'monospace'],
-          },
-          keyframes: {
-            pulseGlow: {
-              '0%,100%': { opacity:'0.7', transform:'scale(1)' },
-              '50%':     { opacity:'1',   transform:'scale(1.06)' },
-            },
-            pulse: {
-              '0%,100%': { opacity:'1',   transform:'scale(1)' },
-              '50%':     { opacity:'0.5', transform:'scale(0.8)' },
-            },
-            expandRing: {
-              '0%,100%': { opacity:'0.6', transform:'translate(-50%,-50%) scale(1)' },
-              '50%':     { opacity:'1',   transform:'translate(-50%,-50%) scale(1.04)' },
-            },
-            floatA: {
-              '0%,100%': { transform:'rotate(-7deg) translateY(0)' },
-              '50%':     { transform:'rotate(-7deg) translateY(-10px)' },
-            },
-            floatB: {
-              '0%,100%': { transform:'translateX(-50%) rotate(0deg) translateY(0)' },
-              '50%':     { transform:'translateX(-50%) rotate(0deg) translateY(-14px)' },
-            },
-            floatC: {
-              '0%,100%': { transform:'rotate(7deg) translateY(0)' },
-              '50%':     { transform:'rotate(7deg) translateY(-10px)' },
-            },
-            floatD: {
-              '0%,100%': { transform:'rotate(5deg) translateY(0)' },
-              '50%':     { transform:'rotate(5deg) translateY(-8px)' },
-            },
-            floatE: {
-              '0%,100%': { transform:'translateX(-50%) rotate(-3deg) translateY(0)' },
-              '50%':     { transform:'translateX(-50%) rotate(-3deg) translateY(-10px)' },
-            },
-            floatF: {
-              '0%,100%': { transform:'rotate(-6deg) translateY(0)' },
-              '50%':     { transform:'rotate(-6deg) translateY(-8px)' },
-            },
-            ticker: {
-              from: { transform:'translateX(0)' },
-              to:   { transform:'translateX(-50%)' },
-            },
-          },
-          animation: {
-            pulseGlow:  'pulseGlow 6s ease-in-out infinite',
-            pulseGlow2: 'pulseGlow 6s ease-in-out infinite 2s',
-            dotPulse:   'pulse 2s infinite',
-            expandRing:  'expandRing 3s ease-in-out infinite',
-            expandRing2: 'expandRing 3s ease-in-out infinite 1s',
-            floatA: 'floatA 5s ease-in-out infinite',
-            floatB: 'floatB 5s ease-in-out infinite 0.5s',
-            floatC: 'floatC 5s ease-in-out infinite 1s',
-            floatD: 'floatD 5s ease-in-out infinite 1.5s',
-            floatE: 'floatE 5s ease-in-out infinite 2s',
-            floatF: 'floatF 5s ease-in-out infinite 2.5s',
-            ticker: 'ticker 18s linear infinite',
-          },
+  theme: {
+    extend: {
+      colors: {
+        black:   '#080808',
+        'off-black': '#101010',
+        card:    '#141414',
+        white:   '#f5f5f0',
+        muted:   'rgba(245,245,240,0.45)',
+        accent:  '#c8f53a',
+        accent2: '#3affa3',
+        'accent-glow': 'rgba(200,245,58,0.18)',
+        border:  'rgba(255,255,255,0.07)',
+      },
+      fontFamily: {
+        display: ['"Bebas Neue"', 'sans-serif'],
+        body:    ['"DM Sans"',    'sans-serif'],
+        mono:    ['"Space Mono"', 'monospace'],
+      },
+      keyframes: {
+        pulseGlow: {
+          '0%,100%': { opacity:'0.7', transform:'scale(1)' },
+          '50%':     { opacity:'1',   transform:'scale(1.06)' },
+        },
+        pulse: {
+          '0%,100%': { opacity:'1',   transform:'scale(1)' },
+          '50%':     { opacity:'0.5', transform:'scale(0.8)' },
+        },
+        expandRing: {
+          '0%,100%': { opacity:'0.6', transform:'translate(-50%,-50%) scale(1)' },
+          '50%':     { opacity:'1',   transform:'translate(-50%,-50%) scale(1.04)' },
+        },
+        floatA: {
+          '0%,100%': { transform:'rotate(-7deg) translateY(0)' },
+          '50%':     { transform:'rotate(-7deg) translateY(-10px)' },
+        },
+        floatB: {
+          '0%,100%': { transform:'translateX(-50%) rotate(0deg) translateY(0)' },
+          '50%':     { transform:'translateX(-50%) rotate(0deg) translateY(-14px)' },
+        },
+        floatC: {
+          '0%,100%': { transform:'rotate(7deg) translateY(0)' },
+          '50%':     { transform:'rotate(7deg) translateY(-10px)' },
+        },
+        floatD: {
+          '0%,100%': { transform:'rotate(5deg) translateY(0)' },
+          '50%':     { transform:'rotate(5deg) translateY(-8px)' },
+        },
+        floatE: {
+          '0%,100%': { transform:'translateX(-50%) rotate(-3deg) translateY(0)' },
+          '50%':     { transform:'translateX(-50%) rotate(-3deg) translateY(-10px)' },
+        },
+        floatF: {
+          '0%,100%': { transform:'rotate(-6deg) translateY(0)' },
+          '50%':     { transform:'rotate(-6deg) translateY(-8px)' },
+        },
+        ticker: {
+          from: { transform:'translateX(0)' },
+          to:   { transform:'translateX(-50%)' },
         },
       },
-    };
-
-    
-    /* ── Scroll reveal ── */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
- 
-    /* ── Extra toggles ── */
-    function toggleExtra(btn, subId) {
-      btn.classList.toggle('active');
-      const isActive = btn.classList.contains('active');
-      btn.style.borderColor = isActive ? '#c8f53a' : '';
-      btn.style.background  = isActive ? 'rgba(200,245,58,0.07)' : '';
-      const label = btn.querySelector('.extra-toggle-label');
-      if (label) label.style.color = isActive ? '#c8f53a' : '';
-      if (subId) {
-        const sub = document.getElementById(subId);
-        if (sub) sub.classList.toggle('visible', isActive);
-      }
-    }
- 
-    /* ── File upload preview ── */
-    function handleUpload(input, previewId, nameId) {
-      const file = input.files[0];
-      if (!file) return;
-      const box = input.closest('.upload-box');
-      box.classList.add('has-file');
-      document.getElementById(nameId).textContent = file.name;
-      const preview = document.getElementById(previewId);
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-      const icon = box.querySelector('.upload-icon');
-      if (icon) icon.style.display = 'none';
-    }
- 
-    /* ── Form submit ── */
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('.submit-btn') || e.target.querySelector('button[type="submit"]');
-      if (btn) {
-        btn.textContent = 'Order Received! ✓';
-        btn.style.background = '#3affa3';
-        setTimeout(() => {
-          btn.textContent = 'Submit My Order →';
-          btn.style.background = '';
-        }, 3000);
-      }
-    }
+      animation: {
+        pulseGlow:  'pulseGlow 6s ease-in-out infinite',
+        pulseGlow2: 'pulseGlow 6s ease-in-out infinite 2s',
+        dotPulse:   'pulse 2s infinite',
+        expandRing:  'expandRing 3s ease-in-out infinite',
+        expandRing2: 'expandRing 3s ease-in-out infinite 1s',
+        floatA: 'floatA 5s ease-in-out infinite',
+        floatB: 'floatB 5s ease-in-out infinite 0.5s',
+        floatC: 'floatC 5s ease-in-out infinite 1s',
+        floatD: 'floatD 5s ease-in-out infinite 1.5s',
+        floatE: 'floatE 5s ease-in-out infinite 2s',
+        floatF: 'floatF 5s ease-in-out infinite 2.5s',
+        ticker: 'ticker 18s linear infinite',
+      },
+    },
+  },
+};
 
 // ─── CONFIG ───────────────────────────────────────────────────
 const CONFIG = {
@@ -170,38 +121,6 @@ function initReveal() {
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-}
-
-// =============================================================
-//  UPLOAD PREVIEW
-// =============================================================
-function handleUpload(input, previewId, nameId) {
-  const file = input.files[0];
-  if (!file) return;
-
-  const box     = input.closest('.upload-box');
-  const preview = document.getElementById(previewId);
-  const nameEl  = document.getElementById(nameId);
-  const reader  = new FileReader();
-
-  reader.onload = (e) => {
-    preview.src             = e.target.result;
-    preview.style.display   = 'block';
-    nameEl.textContent      = file.name;
-    box.classList.add('has-file');
-  };
-
-  reader.readAsDataURL(file);
-}
-
-// =============================================================
-//  EXTRAS TOGGLE
-// =============================================================
-function toggleExtra(el, subId) {
-  el.classList.toggle('active');
-  if (subId) {
-    document.getElementById(subId)?.classList.toggle('visible');
-  }
 }
 
 // =============================================================
@@ -250,8 +169,8 @@ function readImage(inputId) {
 // =============================================================
 function resetBtn() {
   if (!state.pendingBtn) return;
-  state.pendingBtn.textContent  = 'Submit My Order →';
-  state.pendingBtn.disabled     = false;
+  state.pendingBtn.textContent   = 'Submit My Order →';
+  state.pendingBtn.disabled      = false;
   state.pendingBtn.style.opacity = '1';
 }
 
@@ -259,46 +178,40 @@ function resetBtn() {
 //  RESET FORM
 // =============================================================
 function resetForm() {
-  state.pendingForm?.reset();
+  const form = state.pendingForm ?? document.querySelector('#order form');
+  form?.reset();
 
-  // Clear image previews
-  ['upload-product-preview', 'upload-logo-preview'].forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) { el.classList.add('hidden'); el.src = ''; }
+  // Clear image previews + remove buttons
+  ['product', 'logo'].forEach(key => {
+    document.getElementById(`upload-${key}-preview`)?.classList.add('hidden');
+    document.getElementById(`${key}-remove`)?.classList.add('hidden');
   });
 
-    ['product-remove', 'logo-remove'].forEach((id) => {
-      const btn = document.getElementById(id);
-      if (btn) btn.classList.add('hidden');
-    });
-
-  // Reset upload labels
-  const labels = {
-    'upload-product-name': 'Click to upload · PNG, JPG, WEBP',
-    'upload-logo-name':    'Click to upload · PNG, SVG, JPG',
-  };
-  Object.entries(labels).forEach(([id, text]) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = text;
+  // Reset extra buttons — remove active class + inline styles
+  document.querySelectorAll('.extra-btn').forEach(btn => {
+    btn.classList.remove('active');
+    btn.removeAttribute('style');
   });
 
-  // Clear toggled states
-  document.querySelectorAll('.upload-box.has-file').forEach((b) => b.classList.remove('has-file'));
-  document.querySelectorAll('.extra-toggle.active').forEach((t) => t.classList.remove('active'));
-  document.querySelectorAll('.extra-subopts.visible').forEach((s) => s.classList.remove('visible'));
+  // Hide sub-option dropdowns + reset their selects
+  ['voiceover-opts', 'variations-opts'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('hidden');
+    const select = el.querySelector('select');
+    if (select) select.selectedIndex = 0;
+  });
 }
 
 // =============================================================
 //  PAYMENT POPUP
 // =============================================================
 function showPaymentPopup(total, custEmail, productName, pkg) {
-
   document.getElementById('payment-overlay')?.remove();
 
   const overlay = document.createElement('div');
   overlay.id = 'payment-overlay';
 
-// Replace your setAttribute style block with this:
   overlay.setAttribute('style', `
     position: fixed;
     top: 0;
@@ -410,7 +323,6 @@ function showPaymentPopup(total, custEmail, productName, pkg) {
       </div>
     </div>`;
 
-  // ✅ Append to <body> and lock scroll
   document.body.appendChild(overlay);
 
   overlay.addEventListener('click', (e) => {
@@ -422,19 +334,15 @@ function showPaymentPopup(total, custEmail, productName, pkg) {
   }
 
   document.getElementById('close-payment-btn').addEventListener('click', () => {
-    // Unmount Stripe elements cleanly before removing from DOM
     if (state.cardElement) {
       state.cardElement.unmount();
       state.cardElement = null;
     }
 
-    // Clear the error message
     const errEl = document.getElementById('stripe-card-errors');
     if (errEl) errEl.textContent = '';
 
-    // Reset the pay button
     resetBtn();
-
     closeModal();
   });
 
@@ -471,7 +379,6 @@ async function handleStripePayment(total, custEmail) {
   const btn = document.getElementById('stripe-pay-btn');
   if (!btn || !state.cardElement) return;
 
-  // Loading state
   btn.textContent   = 'Processing...';
   btn.disabled      = true;
   btn.style.opacity = '0.6';
@@ -482,11 +389,10 @@ async function handleStripePayment(total, custEmail) {
     btn.textContent   = `Pay $${total} USD`;
     btn.disabled      = false;
     btn.style.opacity = '1';
-    showErrorNotif(msg); // ✅ show error notification
+    showErrorNotif(msg);
   };
 
   try {
-    // 1. Create PaymentIntent via Netlify function
     const res  = await fetch(CONFIG.PAYMENT_INTENT_URL, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -496,7 +402,6 @@ async function handleStripePayment(total, custEmail) {
 
     if (!data.clientSecret) throw new Error(data.error ?? 'Payment setup failed. Please try again.');
 
-    // 2. Confirm card payment
     const { error, paymentIntent } = await state.stripe.confirmCardPayment(data.clientSecret, {
       payment_method: { card: state.cardElement },
     });
@@ -504,9 +409,10 @@ async function handleStripePayment(total, custEmail) {
     if (error) {
       setError(error.message);
     } else if (paymentIntent?.status === 'succeeded') {
-      showSuccessNotif();          // ✅ show success notification
-      showOrderComplete(custEmail); // shows the full confirmation overlay
+      showSuccessNotif();
+      showOrderComplete(custEmail);
       submitOrderToSheets(custEmail);
+      resetForm();
     }
   } catch (err) {
     setError(err.message);
@@ -521,8 +427,7 @@ async function handleStripePayment(total, custEmail) {
 
 //   setTimeout(() => {
 //     console.log("Mock payment success");
-
-//     submitOrderToSheets(custEmail); // ✅ triggers email
+//     submitOrderToSheets(custEmail);
 //   }, 1500);
 // }
 
@@ -610,15 +515,9 @@ function showOrderComplete(custEmail) {
     document.documentElement.style.overflow = prevHtmlOverflow;
   }
 
-  // Close on Done button
   document.getElementById('done-close-btn').addEventListener('click', closeDone);
+  done.addEventListener('click', (e) => { if (e.target === done) closeDone(); });
 
-  // Close on backdrop click
-  done.addEventListener('click', (e) => {
-    if (e.target === done) closeDone();
-  });
-
-  // Reset everything
   resetForm();
   resetBtn();
   state.pendingFormData = null;
@@ -636,7 +535,6 @@ async function handleSubmit(evt) {
   state.pendingForm = form;
   state.pendingBtn  = btn;
 
-  // Collect form values
   const productName = document.getElementById('product-name').value.trim();
   const custEmail   = document.getElementById('email').value.trim();
   const adFormatEl  = document.getElementById('ad-format');
@@ -645,32 +543,25 @@ async function handleSubmit(evt) {
   const pkg         = packageEl.options[packageEl.selectedIndex].text;
   const notes       = document.getElementById('description').value.trim();
 
-  // Build extras string (FIXED)
   const extrasArr = [];
 
-  // VOICEOVER
   const voiceBtn = document.querySelector('[onclick*="voiceover-opts"]');
   const voiceSel = document.querySelector('#voiceover-opts select');
-
-  if (voiceBtn?.classList.contains('border-accent')) {
+  if (voiceBtn?.classList.contains('active')) {
     const text = voiceSel?.selectedOptions?.[0]?.text;
     extrasArr.push(text ? `Voiceover (${text})` : 'Voiceover');
   }
 
-  // VARIATIONS
   const varBtn = document.querySelector('[onclick*="variations-opts"]');
   const varSel = document.querySelector('#variations-opts select');
-
-  if (varBtn?.classList.contains('border-accent')) {
+  if (varBtn?.classList.contains('active')) {
     const text = varSel?.selectedOptions?.[0]?.text;
     extrasArr.push(text ? `Variations (${text})` : 'Variations');
   }
 
-  // THUMBNAIL
   const thumbBtn = [...document.querySelectorAll('.extra-btn')]
     .find(btn => btn.textContent.includes('Thumbnail'));
-
-  if (thumbBtn?.classList.contains('border-accent')) {
+  if (thumbBtn?.classList.contains('active')) {
     extrasArr.push('Thumbnail');
   }
 
@@ -682,18 +573,15 @@ async function handleSubmit(evt) {
     return;
   }
 
-  // Loading state
-  btn.textContent    = 'Preparing payment...';
-  btn.disabled       = true;
-  btn.style.opacity  = '0.6';
+  btn.textContent   = 'Preparing payment...';
+  btn.disabled      = true;
+  btn.style.opacity = '0.6';
 
-  // Read images in parallel
   const [prodImg, logoImg] = await Promise.all([
     readImage('upload-product'),
     readImage('upload-logo'),
   ]);
 
-  // Build FormData for Google Sheets
   const fd = new FormData();
   fd.append('productName',  productName);
   fd.append('custEmail',    custEmail);
@@ -711,14 +599,16 @@ async function handleSubmit(evt) {
 
   state.pendingFormData = fd;
 
-  // Restore button, then show payment popup
-  btn.textContent    = 'Submit My Order →';
-  btn.disabled       = false;
-  btn.style.opacity  = '1';
+  btn.textContent   = 'Submit My Order →';
+  btn.disabled      = false;
+  btn.style.opacity = '1';
 
   showPaymentPopup(total, custEmail, productName, pkg);
 }
 
+// =============================================================
+//  NOTIFICATIONS
+// =============================================================
 function showSuccessNotif() {
   showNotif('Payment successful! Order confirmed.', 'success');
 }
@@ -728,7 +618,6 @@ function showErrorNotif(message) {
 }
 
 function showNotif(message, type) {
-  // Remove any existing notif
   document.getElementById('payment-notif')?.remove();
 
   const isSuccess = type === 'success';
@@ -784,14 +673,12 @@ function showNotif(message, type) {
 
   document.body.appendChild(notif);
 
-  // Slide in
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       notif.style.transform = 'translateX(0)';
     });
   });
 
-  // Auto dismiss
   const dismissAfter = isSuccess ? 5000 : 8000;
   let autoTimer = setTimeout(() => dismiss(), dismissAfter);
 
@@ -805,23 +692,74 @@ function showNotif(message, type) {
 }
 
 // =============================================================
-//  INIT
+//  EXTRAS TOGGLE
 // =============================================================
-document.addEventListener('DOMContentLoaded', () => {
-  initReveal();
-});
+function toggleExtra(btn, subId) {
+  const isActive = btn.classList.toggle('active');
 
-const btn = document.getElementById("menu-btn");
-const menu = document.getElementById("mobile-menu");
+  btn.style.borderColor = isActive ? '#c8f53a' : '';
+  btn.style.background  = isActive ? 'rgba(200,245,58,0.07)' : '';
+  btn.style.color       = isActive ? '#c8f53a' : '';
 
-btn.addEventListener("click", () => {
-menu.classList.toggle("hidden");
-});
+  if (subId) {
+    document.getElementById(subId)?.classList.toggle('hidden', !isActive);
+  }
+}
 
+// =============================================================
+//  IMAGE PREVIEW
+// =============================================================
+function previewImage(event, previewId) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const img = document.getElementById(previewId);
+    img.src = e.target.result;
+    img.classList.remove('hidden');
+
+    const removeBtn = document.getElementById(previewId.includes('product') ? 'product-remove' : 'logo-remove');
+    if (removeBtn) removeBtn.classList.remove('hidden');
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function removeImage(e, inputId, previewId) {
+  e.stopPropagation();
+
+  const input = document.getElementById(inputId);
+  const img   = document.getElementById(previewId);
+
+  input.value = '';
+  img.src     = '';
+  img.classList.add('hidden');
+
+  const removeBtn = document.getElementById(previewId.includes('product') ? 'product-remove' : 'logo-remove');
+  if (removeBtn) removeBtn.classList.add('hidden');
+}
+
+function handleDrop(event, inputId, previewId) {
+  event.preventDefault();
+
+  const file = event.dataTransfer.files[0];
+  if (!file) return;
+
+  const input = document.getElementById(inputId);
+  const dataTransfer = new DataTransfer();
+  dataTransfer.items.add(file);
+  input.files = dataTransfer.files;
+
+  previewImage({ target: input }, previewId);
+}
+
+// =============================================================
+//  CAROUSEL
+// =============================================================
 const outer = document.getElementById('carouselOuter');
 const track = document.getElementById('carouselTrack');
 
-// Duplicate for infinite loop
 track.innerHTML += track.innerHTML;
 
 const CARD_W = 240;
@@ -829,9 +767,9 @@ const GAP    = 20;
 const STEP   = CARD_W + GAP;
 const TOTAL  = track.children.length / 2;
 
-let index   = 0;
-let offset  = 0;   // live drag offset in px
-let dragX   = 0;
+let index      = 0;
+let offset     = 0;
+let dragX      = 0;
 let isDragging = false;
 
 function setTranslate(px, animate) {
@@ -842,17 +780,15 @@ function setTranslate(px, animate) {
 }
 
 function snapTo(i) {
-  // Seamless loop boundary
   if (i >= TOTAL) { i = 0; setTranslate(-i * STEP, false); }
   if (i < 0)      { i = TOTAL - 1; setTranslate(-i * STEP, false); }
   index = i;
   setTranslate(-index * STEP, true);
 }
 
-// ── Pointer events (mouse + touch unified) ──────────────────────
 outer.addEventListener('pointerdown', e => {
   isDragging = true;
-  dragX = e.clientX;
+  dragX  = e.clientX;
   offset = -index * STEP;
   outer.style.cursor = 'grabbing';
   track.style.transition = 'none';
@@ -861,8 +797,7 @@ outer.addEventListener('pointerdown', e => {
 
 outer.addEventListener('pointermove', e => {
   if (!isDragging) return;
-  const delta = e.clientX - dragX;
-  setTranslate(offset + delta, false);
+  setTranslate(offset + (e.clientX - dragX), false);
 });
 
 outer.addEventListener('pointerup', e => {
@@ -870,7 +805,7 @@ outer.addEventListener('pointerup', e => {
   isDragging = false;
   outer.style.cursor = 'grab';
   const delta = e.clientX - dragX;
-  const moved = Math.round(-delta / STEP);  // cards dragged past
+  const moved = Math.round(-delta / STEP);
   snapTo(index + (moved || (delta < -40 ? 1 : delta > 40 ? -1 : 0)));
 });
 
@@ -880,74 +815,17 @@ outer.addEventListener('pointercancel', () => {
   snapTo(index);
 });
 
-// ── Auto-advance ─────────────────────────────────────────────────
-setInterval(() => {
-  if (!isDragging) snapTo(index + 1);
-}, 5000);
-
-// ── Prevent drag from triggering video click / text selection ────
 outer.addEventListener('dragstart', e => e.preventDefault());
 
-function toggleExtra(btn, targetId) {
+setInterval(() => { if (!isDragging) snapTo(index + 1); }, 5000);
 
-  // toggle dropdown
-  if (targetId) {
-    const el = document.getElementById(targetId);
-    el.classList.toggle('hidden');
-  }
+// =============================================================
+//  INIT
+// =============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  initReveal();
 
-  // toggle active state on button
-  btn.classList.toggle('border-accent');
-  btn.classList.toggle('text-white');
-  btn.classList.toggle('bg-white/[0.06]');
-  btn.classList.toggle('text-white/60');
-}
-
-function previewImage(event, previewId) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = function (e) {
-    const img = document.getElementById(previewId);
-    img.src = e.target.result;
-    img.classList.remove("hidden");
-
-    // show remove button
-    const removeBtn = document.getElementById(previewId.includes("product") ? "product-remove" : "logo-remove");
-    if (removeBtn) removeBtn.classList.remove("hidden");
-  };
-
-  reader.readAsDataURL(file);
-}
-
-function removeImage(e, inputId, previewId) {
-  e.stopPropagation();
-
-  const input = document.getElementById(inputId);
-  const img = document.getElementById(previewId);
-
-  input.value = "";
-  img.src = "";
-  img.classList.add("hidden");
-
-  const removeBtn = document.getElementById(previewId.includes("product") ? "product-remove" : "logo-remove");
-  if (removeBtn) removeBtn.classList.add("hidden");
-}
-
-function handleDrop(event, inputId, previewId) {
-  event.preventDefault();
-
-  const file = event.dataTransfer.files[0];
-  if (!file) return;
-
-  const input = document.getElementById(inputId);
-
-  // assign file manually
-  const dataTransfer = new DataTransfer();
-  dataTransfer.items.add(file);
-  input.files = dataTransfer.files;
-
-  previewImage({ target: input }, previewId);
-}
+  const btn  = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+});
