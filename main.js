@@ -127,19 +127,25 @@ function initReveal() {
 //  PRICE CALCULATOR
 // =============================================================
 function calcTotal() {
-  const PACKAGE_PRICES = { starter: 100, growth: 250, elite: 500 };
+  const PACKAGE_PRICES = { test: 1, starter: 100, growth: 250, elite: 500 };
   const EXTRA_PRICES   = { variations: { '1': 10, '3': 25, '5': 40 } };
 
-  const pkg  = document.getElementById('package')?.value ?? '';
-  let   total = PACKAGE_PRICES[pkg] ?? 0;
+  const pkg = document.getElementById('package')?.value ?? '';
+  let total = PACKAGE_PRICES[pkg] ?? 0;
 
-  document.querySelectorAll('.extra-toggle.active').forEach((toggle) => {
-    const label = toggle.querySelector('.extra-toggle-label')?.textContent ?? '';
+  document.querySelectorAll('.extra-btn.active').forEach((btn) => {
+    const type = btn.dataset.extra;
 
-    if (label.includes('Voiceover'))  total += 10;
-    if (label.includes('Thumbnail'))  total += 10;
-    if (label.includes('Variations')) {
-      const sel = toggle.closest('.extra-item')?.querySelector('.extra-select');
+    if (type === 'voiceover') {
+      total += 10;
+    }
+
+    if (type === 'thumbnail') {
+      total += 10;
+    }
+
+    if (type === 'variations') {
+      const sel = document.getElementById('variations-qty');
       total += EXTRA_PRICES.variations[sel?.value] ?? 0;
     }
   });
@@ -206,7 +212,7 @@ function resetForm() {
 // =============================================================
 //  PAYMENT POPUP
 // =============================================================
-function showPaymentPopup(total, custEmail, productName, pkg) {
+function showPaymentPopup(total, custEmail, productName, pkg, extras) {
   document.getElementById('payment-overlay')?.remove();
 
   const overlay = document.createElement('div');
@@ -263,6 +269,16 @@ function showPaymentPopup(total, custEmail, productName, pkg) {
           <span style="font-size:0.88rem;color:rgba(245,245,240,0.65);">${productName}</span>
           <span style="font-size:0.88rem;color:rgba(245,245,240,0.65);">${pkg}</span>
         </div>
+        ${extras && extras !== 'None' ? `
+          <div style="margin-top:8px;font-size:0.78rem;color:rgba(245,245,240,0.45);line-height:1.4;">
+            <span style="font-family:'Space Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;">
+              Extras:
+            </span>
+            <div style="margin-top:4px;">
+              ${extras}
+            </div>
+          </div>
+        ` : ''}
         <div style="border-top:1px solid rgba(255,255,255,0.07);margin:10px 0;"></div>
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <span style="font-size:0.9rem;font-weight:600;color:#f5f5f0;">Total Due</span>
@@ -537,42 +553,66 @@ async function handleSubmit(evt) {
 
   const productName = document.getElementById('product-name').value.trim();
   const custEmail   = document.getElementById('email').value.trim();
+
   const adFormatEl  = document.getElementById('ad-format');
   const adFormat    = adFormatEl.options[adFormatEl.selectedIndex].text;
+
   const packageEl   = document.getElementById('package');
-  const pkg         = packageEl.options[packageEl.selectedIndex].text;
+  const pkgValue    = packageEl.value;
+  const pkgLabel    = packageEl.options[packageEl.selectedIndex].text;
+
   const notes       = document.getElementById('description').value.trim();
 
+  // =============================================================
+  // EXTRAS
+  // =============================================================
   const extrasArr = [];
 
-  const voiceBtn = document.querySelector('[onclick*="voiceover-opts"]');
-  const voiceSel = document.querySelector('#voiceover-opts select');
-  if (voiceBtn?.classList.contains('active')) {
-    const text = voiceSel?.selectedOptions?.[0]?.text;
-    extrasArr.push(text ? `Voiceover (${text})` : 'Voiceover');
-  }
+  document.querySelectorAll('.extra-btn.active').forEach((btn) => {
+    const type = btn.dataset.extra;
 
-  const varBtn = document.querySelector('[onclick*="variations-opts"]');
-  const varSel = document.querySelector('#variations-opts select');
-  if (varBtn?.classList.contains('active')) {
-    const text = varSel?.selectedOptions?.[0]?.text;
-    extrasArr.push(text ? `Variations (${text})` : 'Variations');
-  }
+    if (type === 'voiceover') {
+      const sel = document.getElementById('voiceover-accent');
+      const value = sel?.value;
 
-  const thumbBtn = [...document.querySelectorAll('.extra-btn')]
-    .find(btn => btn.textContent.includes('Thumbnail'));
-  if (thumbBtn?.classList.contains('active')) {
-    extrasArr.push('Thumbnail');
-  }
+      if (value) {
+        const text = sel.options[sel.selectedIndex].text;
+        extrasArr.push(`Voiceover (${text})`);
+      } else {
+        extrasArr.push('Voiceover');
+      }
+    }
+
+    if (type === 'thumbnail') {
+      extrasArr.push('Thumbnail');
+    }
+
+    if (type === 'variations') {
+      const sel = document.getElementById('variations-qty');
+      const value = sel?.value;
+
+      if (value) {
+        const text = sel.options[sel.selectedIndex].text;
+        extrasArr.push(text);
+      }
+    }
+  });
 
   const extras = extrasArr.length ? extrasArr.join(' | ') : 'None';
 
+  // =============================================================
+  // TOTAL
+  // =============================================================
   const total = calcTotal();
-  if (total === 0) {
+
+  if (!pkgValue || total === 0) {
     alert('Please select a package before submitting.');
     return;
   }
 
+  // =============================================================
+  // UI LOADING STATE
+  // =============================================================
   btn.textContent   = 'Preparing payment...';
   btn.disabled      = true;
   btn.style.opacity = '0.6';
@@ -582,30 +622,50 @@ async function handleSubmit(evt) {
     readImage('upload-logo'),
   ]);
 
+  // =============================================================
+  // FORM DATA
+  // =============================================================
   const fd = new FormData();
+
   fd.append('productName',  productName);
   fd.append('custEmail',    custEmail);
   fd.append('adFormat',     adFormat);
-  fd.append('package',      pkg);
+
+  fd.append('package',      pkgValue);
+  fd.append('packageLabel', pkgLabel);
+
   fd.append('notes',        notes);
   fd.append('extras',       extras);
+
   fd.append('total',        `$${total} USD`);
+
   fd.append('productImage', prodImg.name || 'Not uploaded');
   fd.append('logoName',     logoImg.name || 'Not uploaded');
   fd.append('productB64',   prodImg.b64);
   fd.append('productMime',  prodImg.mime);
   fd.append('logoB64',      logoImg.b64);
-  fd.append('logoMime',     logoImg.mime);
+  fd.append('logoMime',    logoImg.mime);
 
   state.pendingFormData = fd;
 
+  // =============================================================
+  // RESET BUTTON (before popup)
+  // =============================================================
   btn.textContent   = 'Submit My Order →';
   btn.disabled      = false;
   btn.style.opacity = '1';
 
-  showPaymentPopup(total, custEmail, productName, pkg);
-}
+  // =============================================================
+  // DEBUG
+  // =============================================================
+  console.log("TOTAL:", total);
+  console.log("EXTRAS:", extrasArr);
 
+  // =============================================================
+  // PAYMENT POPUP
+  // =============================================================
+  showPaymentPopup(total, custEmail, productName, pkgLabel, extras);
+}
 // =============================================================
 //  NOTIFICATIONS
 // =============================================================
