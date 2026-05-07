@@ -426,9 +426,7 @@ async function handleStripePayment(total, custEmail) {
       setError(error.message);
     } else if (paymentIntent?.status === 'succeeded') {
       showSuccessNotif();
-      showOrderComplete(custEmail);
-      submitOrderToSheets(custEmail);
-      resetForm();
+      await submitOrderToSheets(custEmail);
     }
   } catch (err) {
     setError(err.message);
@@ -453,10 +451,10 @@ async function handleStripePayment(total, custEmail) {
 function submitOrderToSheets(custEmail) {
   if (!state.pendingFormData) {
     showOrderComplete(custEmail);
-    return;
+    return Promise.resolve();
   }
 
-  fetch(CONFIG.SCRIPT_URL, {
+  return fetch(CONFIG.SCRIPT_URL, {
     method: 'POST',
     mode:   'no-cors',
     body:   state.pendingFormData,
