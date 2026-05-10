@@ -1067,164 +1067,175 @@
     <div class="text-[0.72rem] text-white/20 font-mono">© 2026 Elite Converting Ads · All rights reserved</div>
   </footer>
 
-  <!-- INFINITE CAROUSEL SCRIPT — runs after DOM is ready -->
-  <script>
-    (function () {
-      const CARD_DATA = [
-        { img: 'ASSETS/images/TikTok/4Mode Faucet.png',                       src: 'ASSETS/videos/4Mode Faucet.mp4' },
-        { img: 'ASSETS/images/Meta Ads/Intense Pulsed Light - 101.png',        src: 'ASSETS/videos/Intense Pulsed Light - 101 2x.mp4' },
-        { img: 'ASSETS/images/TikTok/RipSurf Skateboard.png',                  src: 'ASSETS/videos/RipSurf Skateboard - 101.mp4' },
-        { img: 'ASSETS/images/Meta Ads/Robot - 101.png',                       src: 'ASSETS/videos/Robot - 101.mp4' },
-        { img: 'ASSETS/images/TikTok/Shoe Cleaner.png',                        src: 'ASSETS/videos/Shoe Cleaner 9x16.mp4' },
-        { img: 'ASSETS/images/Meta Ads/Triple Monitor - 101.png',              src: 'ASSETS/videos/Triple Monitor - 101.mp4' },
-        { img: 'ASSETS/images/Meta Ads/A Maze Ball.png',                       src: 'ASSETS/videos/A-Maze Ball .mp4' },
-        { img: 'ASSETS/images/Meta Ads/Lint Remover.png',                      src: 'ASSETS/videos/Lint Remover.mp4' },
-        { img: 'ASSETS/images/TikTok/Mosquito Bracelet .png',                  src: 'ASSETS/videos/Mosquito Bracelet.mp4' },
-        { img: 'ASSETS/images/Meta Ads/Sunscreen Applicator.png',              src: 'ASSETS/videos/Sunscreen Applicator.mp4' },
-        { img: 'ASSETS/images/TikTok/Water Proof PhoneHolder.png',             src: 'ASSETS/videos/Waterproof PhoneHolder.mp4' },
-        { img: 'ASSETS/images/TikTok/Wholefacemask Maker Machine.png',         src: 'ASSETS/videos/Wholefacemask machine.mp4' },
-      ];
+<script>
+(function () {
+  const CARD_DATA = [
+    { img: 'ASSETS/images/TikTok/4Mode Faucet.png',                     src: 'ASSETS/videos/4Mode Faucet.mp4' },
+    { img: 'ASSETS/images/Meta Ads/Intense Pulsed Light - 101.png',      src: 'ASSETS/videos/Intense Pulsed Light - 101 2x.mp4' },
+    { img: 'ASSETS/images/TikTok/RipSurf Skateboard.png',                src: 'ASSETS/videos/RipSurf Skateboard - 101.mp4' },
+    { img: 'ASSETS/images/Meta Ads/Robot - 101.png',                     src: 'ASSETS/videos/Robot - 101.mp4' },
+    { img: 'ASSETS/images/TikTok/Shoe Cleaner.png',                      src: 'ASSETS/videos/Shoe Cleaner 9x16.mp4' },
+    { img: 'ASSETS/images/Meta Ads/Triple Monitor - 101.png',            src: 'ASSETS/videos/Triple Monitor - 101.mp4' },
+    { img: 'ASSETS/images/Meta Ads/A Maze Ball.png',                     src: 'ASSETS/videos/A-Maze Ball .mp4' },
+    { img: 'ASSETS/images/Meta Ads/Lint Remover.png',                    src: 'ASSETS/videos/Lint Remover.mp4' },
+    { img: 'ASSETS/images/TikTok/Mosquito Bracelet .png',                src: 'ASSETS/videos/Mosquito Bracelet.mp4' },
+    { img: 'ASSETS/images/Meta Ads/Sunscreen Applicator.png',            src: 'ASSETS/videos/Sunscreen Applicator.mp4' },
+    { img: 'ASSETS/images/TikTok/Water Proof PhoneHolder.png',           src: 'ASSETS/videos/Waterproof PhoneHolder.mp4' },
+    { img: 'ASSETS/images/TikTok/Wholefacemask Maker Machine.png',       src: 'ASSETS/videos/Wholefacemask machine.mp4' },
+  ];
 
-      const CARD_W  = 240; // px
-      const GAP     = 20;  // px (gap-5 = 20px)
-      const SPEED   = 0.5; // px per frame (auto-scroll)
+  const CARD_W = 240;
+  const GAP    = 20;
+  const SPEED  = 0.5;
 
-      const outer = document.getElementById('carouselOuter');
-      const track = document.getElementById('carouselTrack');
-      if (!outer || !track) return;
+  const outer = document.getElementById('carouselOuter');
+  const track = document.getElementById('carouselTrack');
+  if (!outer || !track) return;
 
-      // Build card: img thumbnail shows INSTANTLY, video lazy-loads in background
-      function makeCard(data) {
-        const div = document.createElement('div');
-        div.style.cssText = 'width:240px;height:380px;flex-shrink:0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);position:relative;background:#111;';
+  // ── Build cards ──────────────────────────────────────────────
+  function makeCard(data) {
+    const div = document.createElement('div');
+    div.style.cssText = 'width:240px;height:380px;flex-shrink:0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);position:relative;background:#111;';
 
-        // Thumbnail — sharp image, visible immediately, no wait
-        const thumb = document.createElement('img');
-        thumb.src   = data.img;
-        thumb.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;';
-        thumb.loading = 'lazy';
-        div.appendChild(thumb);
+    // Thumbnail — always visible immediately
+    const thumb = document.createElement('img');
+    thumb.src          = data.img;
+    thumb.loading      = 'lazy';
+    thumb.decoding     = 'async';
+    thumb.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;';
+    div.appendChild(thumb);
 
-        // Video — src NOT set yet, loads only when near viewport
-        const vid = document.createElement('video');
-        vid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.7s ease;';
-        vid.autoplay = true;
-        vid.muted    = true;
-        vid.loop     = true;
-        vid.setAttribute('playsinline', '');
-        vid.addEventListener('canplay', function() { this.style.opacity = '1'; });
-        div._vidSrc = data.src;
-        div._vid    = vid;
-        div.appendChild(vid);
-        return div;
-      }
+    // Video — appended now but src withheld until needed
+    const vid = document.createElement('video');
+    vid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.6s ease;';
+    vid.autoplay = true;
+    vid.muted    = true;
+    vid.loop     = true;
+    vid.preload  = 'none';
+    vid.setAttribute('playsinline', '');
+    vid.addEventListener('canplay', function () {
+      this.style.opacity = '1';
+    }, { once: true });
+    div.appendChild(vid); // append immediately — src loaded later
+    div._vid    = vid;
+    div._vidSrc = data.src;
+    div._loaded = false;
+    return div;
+  }
 
-      const SETS = 3;
-      const allCards = [];
-      for (let s = 0; s < SETS; s++) {
-        CARD_DATA.forEach(d => {
-          const card = makeCard(d);
-          track.appendChild(card);
-          allCards.push(card);
-        });
-      }
-
-      const setWidth = CARD_DATA.length * (CARD_W + GAP);
-      let pos      = setWidth;
-      let autoOn   = true;
-      let isDrag   = false;
-      let startX   = 0;
-      let startPos = 0;
-
-      track.style.transform = `translateX(-${pos}px)`;
-
-      function clampPos() {
-        if (pos >= setWidth * 2) pos -= setWidth;
-        if (pos < 0)             pos += setWidth;
-      }
-
-      // Lazy-load videos only when card scrolls into view area
-      const vidObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const card = entry.target;
-          if (card._vid && !card._vid.src && card._vidSrc) {
-            card._vid.src = card._vidSrc;
-            card._vid.load();
-          }
-          vidObserver.unobserve(card);
-        });
-      }, { rootMargin: '0px 800px 0px 800px' });
-
-      allCards.forEach(c => vidObserver.observe(c));
-
-      function loop() {
-        if (autoOn && !isDrag) {
-          pos += SPEED;
-          clampPos();
-          track.style.transform = `translateX(-${pos}px)`;
-        }
-        requestAnimationFrame(loop);
-      }
-      loop();
-
-      /* ── Mouse drag ── */
-      outer.addEventListener('mousedown', e => {
-        isDrag = true; startX = e.clientX; startPos = pos;
-        outer.style.cursor = 'grabbing';
-        e.preventDefault();
-      });
-      window.addEventListener('mousemove', e => {
-        if (!isDrag) return;
-        pos = startPos - (e.clientX - startX);
-        clampPos();
-        track.style.transform = `translateX(-${pos}px)`;
-      });
-      window.addEventListener('mouseup', () => {
-        if (!isDrag) return;
-        isDrag = false;
-        outer.style.cursor = 'grab';
-        autoOn = false;
-        setTimeout(() => { autoOn = true; }, 900);
-      });
-
-      /* ── Touch drag ── */
-      outer.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX; startPos = pos; autoOn = false;
-      }, { passive: true });
-      outer.addEventListener('touchmove', e => {
-        pos = startPos - (e.touches[0].clientX - startX);
-        clampPos();
-        track.style.transform = `translateX(-${pos}px)`;
-      }, { passive: true });
-      outer.addEventListener('touchend', () => {
-        setTimeout(() => { autoOn = true; }, 900);
-      });
-    })();
-
-    /* ── Mobile menu ── */
-    function closeMobileMenu() {
-      var menu = document.getElementById('mobile-menu');
-      if (menu) menu.style.display = 'none';
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      var btn  = document.getElementById('menu-btn');
-      var menu = document.getElementById('mobile-menu');
-      if (!btn || !menu) return;
-
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
-      });
-
-      document.addEventListener('click', function (e) {
-        if (menu.style.display === 'flex' && !menu.contains(e.target) && e.target !== btn) {
-          menu.style.display = 'none';
-        }
-      });
+  // Build 3 sets for seamless loop
+  const SETS = 3;
+  const allCards = [];
+  for (let s = 0; s < SETS; s++) {
+    CARD_DATA.forEach(d => {
+      const card = makeCard(d);
+      track.appendChild(card);
+      allCards.push(card);
     });
-  </script>
+  }
+
+  const setWidth = CARD_DATA.length * (CARD_W + GAP);
+  let pos      = setWidth; // start at middle set
+  let autoOn   = true;
+  let isDrag   = false;
+  let startX   = 0;
+  let startPos = 0;
+
+  track.style.transform = `translateX(-${pos}px)`;
+
+  function clampPos() {
+    if (pos >= setWidth * 2) pos -= setWidth;
+    if (pos < 0)             pos += setWidth;
+  }
+
+  // ── Video loading: position-based, not observer-based ────────
+  // Since we use CSS transform (not scroll), IntersectionObserver
+  // with root:outer doesn't fire reliably. Instead, check which
+  // cards are within viewport range on every frame.
+  const VIEWPORT_W = window.innerWidth;
+
+  function loadNearbyVideos() {
+    allCards.forEach((card, i) => {
+      if (card._loaded) return;
+      // Card's left edge relative to outer container
+      const cardLeft = (i * (CARD_W + GAP)) - pos;
+      // Load if within 1 card-width of the visible area
+      if (cardLeft > -(CARD_W * 2) && cardLeft < VIEWPORT_W + CARD_W * 2) {
+        card._loaded = true;
+        card._vid.src = card._vidSrc;
+        card._vid.load();
+        card._vid.play().catch(() => {});
+      }
+    });
+  }
+
+  // ── RAF loop ─────────────────────────────────────────────────
+  function loop() {
+    if (autoOn && !isDrag) {
+      pos += SPEED;
+      clampPos();
+      track.style.transform = `translateX(-${pos}px)`;
+    }
+    loadNearbyVideos();
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // ── Mouse drag ───────────────────────────────────────────────
+  outer.addEventListener('mousedown', e => {
+    isDrag = true; startX = e.clientX; startPos = pos;
+    outer.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', e => {
+    if (!isDrag) return;
+    pos = startPos - (e.clientX - startX);
+    clampPos();
+    track.style.transform = `translateX(-${pos}px)`;
+  });
+  window.addEventListener('mouseup', () => {
+    if (!isDrag) return;
+    isDrag = false;
+    outer.style.cursor = 'grab';
+    autoOn = false;
+    setTimeout(() => { autoOn = true; }, 900);
+  });
+
+  // ── Touch drag ───────────────────────────────────────────────
+  outer.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX; startPos = pos; autoOn = false;
+  }, { passive: true });
+  outer.addEventListener('touchmove', e => {
+    pos = startPos - (e.touches[0].clientX - startX);
+    clampPos();
+    track.style.transform = `translateX(-${pos}px)`;
+  }, { passive: true });
+  outer.addEventListener('touchend', () => {
+    setTimeout(() => { autoOn = true; }, 900);
+  });
+})();
+
+// ── Mobile menu ──────────────────────────────────────────────
+function closeMobileMenu() {
+  var menu = document.getElementById('mobile-menu');
+  if (menu) menu.style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var btn  = document.getElementById('menu-btn');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+  });
+  document.addEventListener('click', function (e) {
+    if (menu.style.display === 'flex' && !menu.contains(e.target) && e.target !== btn) {
+      menu.style.display = 'none';
+    }
+  });
+});
+</script>
 
 </body>
 </html>

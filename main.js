@@ -812,78 +812,78 @@ function handleDrop(event, inputId, previewId) {
   previewImage({ target: input }, previewId);
 }
 
-// =============================================================
-//  CAROUSEL
-// =============================================================
+// // =============================================================
+// //  CAROUSEL
+// // =============================================================
 
-    /* ── Carousel drag-to-scroll ── */
-    (function() {
-      const outer = document.getElementById('carouselOuter');
-      const track = document.getElementById('carouselTrack');
-      if (!outer || !track) return;
+//     /* ── Carousel drag-to-scroll ── */
+//     (function() {
+//       const outer = document.getElementById('carouselOuter');
+//       const track = document.getElementById('carouselTrack');
+//       if (!outer || !track) return;
 
-      let isDragging = false, startX = 0, scrollLeft = 0;
+//       let isDragging = false, startX = 0, scrollLeft = 0;
 
-      // Auto-scroll
-      let autoX = 0;
-      const speed = 0.5; // px per frame
-      let rafId;
-      let paused = false;
+//       // Auto-scroll
+//       let autoX = 0;
+//       const speed = 0.5; // px per frame
+//       let rafId;
+//       let paused = false;
 
-      function autoScroll() {
-        if (!paused) {
-          autoX += speed;
-          // Seamless loop: when we've scrolled one full width of original items, reset
-          const halfW = track.scrollWidth / 2;
-          if (autoX >= halfW) autoX = 0;
-          track.style.transform = `translateX(-${autoX}px)`;
-        }
-        rafId = requestAnimationFrame(autoScroll);
-      }
-      autoScroll();
+//       function autoScroll() {
+//         if (!paused) {
+//           autoX += speed;
+//           // Seamless loop: when we've scrolled one full width of original items, reset
+//           const halfW = track.scrollWidth / 2;
+//           if (autoX >= halfW) autoX = 0;
+//           track.style.transform = `translateX(-${autoX}px)`;
+//         }
+//         rafId = requestAnimationFrame(autoScroll);
+//       }
+//       autoScroll();
 
-      outer.addEventListener('mousedown', e => {
-        isDragging = true; paused = true;
-        startX = e.pageX; scrollLeft = autoX;
-        outer.style.cursor = 'grabbing';
-      });
-      window.addEventListener('mouseup', () => {
-        isDragging = false;
-        outer.style.cursor = 'grab';
-        setTimeout(() => { paused = false; }, 800);
-      });
-      outer.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        const dx = e.pageX - startX;
-        autoX = scrollLeft - dx;
-        track.style.transform = `translateX(-${autoX}px)`;
-      });
+//       outer.addEventListener('mousedown', e => {
+//         isDragging = true; paused = true;
+//         startX = e.pageX; scrollLeft = autoX;
+//         outer.style.cursor = 'grabbing';
+//       });
+//       window.addEventListener('mouseup', () => {
+//         isDragging = false;
+//         outer.style.cursor = 'grab';
+//         setTimeout(() => { paused = false; }, 800);
+//       });
+//       outer.addEventListener('mousemove', e => {
+//         if (!isDragging) return;
+//         const dx = e.pageX - startX;
+//         autoX = scrollLeft - dx;
+//         track.style.transform = `translateX(-${autoX}px)`;
+//       });
 
-      // Touch
-      outer.addEventListener('touchstart', e => {
-        paused = true;
-        startX = e.touches[0].pageX;
-        scrollLeft = autoX;
-      }, { passive: true });
-      outer.addEventListener('touchend', () => {
-        setTimeout(() => { paused = false; }, 800);
-      });
-      outer.addEventListener('touchmove', e => {
-        const dx = e.touches[0].pageX - startX;
-        autoX = scrollLeft - dx;
-        track.style.transform = `translateX(-${autoX}px)`;
-      }, { passive: true });
+//       // Touch
+//       outer.addEventListener('touchstart', e => {
+//         paused = true;
+//         startX = e.touches[0].pageX;
+//         scrollLeft = autoX;
+//       }, { passive: true });
+//       outer.addEventListener('touchend', () => {
+//         setTimeout(() => { paused = false; }, 800);
+//       });
+//       outer.addEventListener('touchmove', e => {
+//         const dx = e.touches[0].pageX - startX;
+//         autoX = scrollLeft - dx;
+//         track.style.transform = `translateX(-${autoX}px)`;
+//       }, { passive: true });
 
-      // Duplicate cards for seamless loop
-      const origCards = [...track.querySelectorAll('.carousel-card')];
-      origCards.forEach(card => {
-        const clone = card.cloneNode(true);
-        // Cloned cards shouldn't have lazy-video observer already on them
-        track.appendChild(clone);
-        const cloneVid = clone.querySelector('video.lazy-video');
-        if (cloneVid) videoObserver.observe(cloneVid);
-      });
-    })();
+//       // Duplicate cards for seamless loop
+//       const origCards = [...track.querySelectorAll('.carousel-card')];
+//       origCards.forEach(card => {
+//         const clone = card.cloneNode(true);
+//         // Cloned cards shouldn't have lazy-video observer already on them
+//         track.appendChild(clone);
+//         const cloneVid = clone.querySelector('video.lazy-video');
+//         if (cloneVid) videoObserver.observe(cloneVid);
+//       });
+//     })();
 
 // =============================================================
 //  INIT
