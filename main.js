@@ -81,7 +81,7 @@ tailwind.config = {
 
 // ─── CONFIG ───────────────────────────────────────────────────
 const CONFIG = {
-  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbw86YM14CXf9tWfuxo-vMC-zgIrQKegwyGQ_2NzJ9aH8beC7dk5aBXei5E5wRCNMUop/exec',
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwr_8kKaNeCusrUeLAAuApxtK_7dPQ-AU5Gnv0MMlVdR42oy0f7koPGQPOFuk8US5uI/exec',
   STRIPE_PK:  'pk_live_51TJCTlLc9CxU3CKu4arHLqXjtmFVbLNquU11fCZIIDxlHAfOvCvAdN8bJo4g6qLmupRcTc497F1BFlAJOiTIsCii00ZR2hvFb2',
   PAYMENT_INTENT_URL: '/.netlify/functions/create-payment-intent',
 };
@@ -815,67 +815,75 @@ function handleDrop(event, inputId, previewId) {
 // =============================================================
 //  CAROUSEL
 // =============================================================
-const outer = document.getElementById('carouselOuter');
-const track = document.getElementById('carouselTrack');
 
-track.innerHTML += track.innerHTML;
+    /* ── Carousel drag-to-scroll ── */
+    (function() {
+      const outer = document.getElementById('carouselOuter');
+      const track = document.getElementById('carouselTrack');
+      if (!outer || !track) return;
 
-const CARD_W = 240;
-const GAP    = 20;
-const STEP   = CARD_W + GAP;
-const TOTAL  = track.children.length / 2;
+      let isDragging = false, startX = 0, scrollLeft = 0;
 
-let index      = 0;
-let offset     = 0;
-let dragX      = 0;
-let isDragging = false;
+      // Auto-scroll
+      let autoX = 0;
+      const speed = 0.5; // px per frame
+      let rafId;
+      let paused = false;
 
-function setTranslate(px, animate) {
-  track.style.transition = animate
-    ? 'transform 0.4s cubic-bezier(0.25,0.8,0.25,1)'
-    : 'none';
-  track.style.transform = `translate3d(${px}px, 0, 0)`;
-}
+      function autoScroll() {
+        if (!paused) {
+          autoX += speed;
+          // Seamless loop: when we've scrolled one full width of original items, reset
+          const halfW = track.scrollWidth / 2;
+          if (autoX >= halfW) autoX = 0;
+          track.style.transform = `translateX(-${autoX}px)`;
+        }
+        rafId = requestAnimationFrame(autoScroll);
+      }
+      autoScroll();
 
-function snapTo(i) {
-  if (i >= TOTAL) { i = 0; setTranslate(-i * STEP, false); }
-  if (i < 0)      { i = TOTAL - 1; setTranslate(-i * STEP, false); }
-  index = i;
-  setTranslate(-index * STEP, true);
-}
+      outer.addEventListener('mousedown', e => {
+        isDragging = true; paused = true;
+        startX = e.pageX; scrollLeft = autoX;
+        outer.style.cursor = 'grabbing';
+      });
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+        outer.style.cursor = 'grab';
+        setTimeout(() => { paused = false; }, 800);
+      });
+      outer.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        const dx = e.pageX - startX;
+        autoX = scrollLeft - dx;
+        track.style.transform = `translateX(-${autoX}px)`;
+      });
 
-outer.addEventListener('pointerdown', e => {
-  isDragging = true;
-  dragX  = e.clientX;
-  offset = -index * STEP;
-  outer.style.cursor = 'grabbing';
-  track.style.transition = 'none';
-  outer.setPointerCapture(e.pointerId);
-});
+      // Touch
+      outer.addEventListener('touchstart', e => {
+        paused = true;
+        startX = e.touches[0].pageX;
+        scrollLeft = autoX;
+      }, { passive: true });
+      outer.addEventListener('touchend', () => {
+        setTimeout(() => { paused = false; }, 800);
+      });
+      outer.addEventListener('touchmove', e => {
+        const dx = e.touches[0].pageX - startX;
+        autoX = scrollLeft - dx;
+        track.style.transform = `translateX(-${autoX}px)`;
+      }, { passive: true });
 
-outer.addEventListener('pointermove', e => {
-  if (!isDragging) return;
-  setTranslate(offset + (e.clientX - dragX), false);
-});
-
-outer.addEventListener('pointerup', e => {
-  if (!isDragging) return;
-  isDragging = false;
-  outer.style.cursor = 'grab';
-  const delta = e.clientX - dragX;
-  const moved = Math.round(-delta / STEP);
-  snapTo(index + (moved || (delta < -40 ? 1 : delta > 40 ? -1 : 0)));
-});
-
-outer.addEventListener('pointercancel', () => {
-  isDragging = false;
-  outer.style.cursor = 'grab';
-  snapTo(index);
-});
-
-outer.addEventListener('dragstart', e => e.preventDefault());
-
-setInterval(() => { if (!isDragging) snapTo(index + 1); }, 5000);
+      // Duplicate cards for seamless loop
+      const origCards = [...track.querySelectorAll('.carousel-card')];
+      origCards.forEach(card => {
+        const clone = card.cloneNode(true);
+        // Cloned cards shouldn't have lazy-video observer already on them
+        track.appendChild(clone);
+        const cloneVid = clone.querySelector('video.lazy-video');
+        if (cloneVid) videoObserver.observe(cloneVid);
+      });
+    })();
 
 // =============================================================
 //  INIT
